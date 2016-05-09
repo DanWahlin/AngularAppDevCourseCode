@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row grid-container">
+        <div class="col-md-10">
+            <div class="table">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                    <!--
+
+                        TODO 1: Use Event Binding
+
+                        Add an event binding to the first <th> below to bind
+                        the click event to a sort() function defined in the
+                        component code. Pass 'firstName' into the sort() function
+                        that the click event binds to as shown next:
+                        
+                        sort('firstName')
+                        
+                        OPTIONAL: If time permits add the click event binding 
+                        to the sort() function for the remaining <th> elements. 
+                        Here's the respective values that should be passed into sort() 
+                        for each <th>:
+                            
+                        lastName
+                        address
+                        city
+                        state.name
+                        orderTotal
+
+                    -->
+                            
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Order Total</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    <!--
+
+                        TODO 2: Use ngFor to Iterate Through Customers
+
+                        1. Add an ngFor directive to the <tr> element immediately 
+                           below that iterates through the array of customers 
+                           exposed by the component class.
+                           Name the ngFor variable "customer".
+
+                        2. Add the following code immediately AFTER the 
+                           customer property in the ngFor (inside of the quotes):
+                        
+                            ;trackBy:trackby.customer
+
+                    -->
+                        
+                        <tr>
+                            <td><img src="images/{{ customer.gender | lowercase }}.png"
+                                    class="card-image" alt="Customer Image" /></td>
+                            <td><a [routerLink]="['/customer',customer.id,'details']">{{ customer.firstName | capitalize }}</a></td>
+                            <td>{{ customer.lastName | capitalize }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>{{ customer.city | trim }}</td>
+                            <td>{{ customer.state.name }}</td>
+                            <td>{{ customer.orderTotal | currency:'USD':true }}</td>
+                            <td><a [routerLink]="['/customer',customer.id,'orders']">View Orders</a></td>
+                        </tr>
+                        <tr *ngIf="!customers.length">
+                            <td>&nbsp;</td>
+                            <td colspan="6">No Records Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

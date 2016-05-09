@@ -1,0 +1,11 @@
+bin
+obj
+*.suo
+packages
+*.mdf
+*.ldf
+node_modules
+
+
+
+

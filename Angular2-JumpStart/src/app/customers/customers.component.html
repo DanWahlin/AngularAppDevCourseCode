@@ -1,0 +1,40 @@
+<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon glyphicon-user"></span>
+                {{ title }}
+            </h3>
+        </header>
+        <br />
+        <div class="row">
+            <div class="col-md-10">
+                <div class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="toolbar-item">
+                            <a (click)="changeDisplayMode(displayModeEnum.Card)" [class.active]="displayMode === displayModeEnum.Card">
+                                <span class="glyphicon glyphicon-th-large"></span> Card View
+                            </a>
+                        </li>
+                        <li class="toolbar-item">
+                            <a (click)="changeDisplayMode(displayModeEnum.Grid)" [class.active]="displayMode === displayModeEnum.Grid">
+                                <span class="glyphicon glyphicon-align-justify"></span> List View
+                            </a>
+                        </li>
+                    </ul>
+                    <filter-textbox class="navbar-right"
+                     (changed)="filterChanged($event)"></filter-textbox>
+                </div>
+            </div>
+        </div>
+        
+        <customers-card 
+          [customers]="filteredCustomers" 
+          [hidden]="displayMode !== displayModeEnum.Card"></customers-card>
+    
+        <customers-grid 
+          [customers]="filteredCustomers" 
+          [hidden]="displayMode !== displayModeEnum.Grid"></customers-grid>
+          
+    </div>
+</div>
