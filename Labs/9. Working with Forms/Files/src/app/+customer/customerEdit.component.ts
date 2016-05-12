@@ -63,13 +63,9 @@ export class CustomerEditComponent implements OnActivate {
   routerOnActivate(current: RouteSegment, prev?: RouteSegment,
       currTree?: RouteTree, prevTree?: RouteTree) {
 
-      const id = +currTree.parent(current).getParam('id');
-      this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
-        //Quick and dirty clone used in case user cancels out of form
-        const cust = JSON.stringify(customer);
-        this.customer = JSON.parse(cust);
-      });
-      this.dataService.getStates().subscribe((states: IState[]) => this.states = states);
+
+
+
   }
   
   /*
@@ -88,29 +84,6 @@ export class CustomerEditComponent implements OnActivate {
   
   */
 
-  onSubmit() {
-     this.dataService.updateCustomer(this.customer)
-       .subscribe((status: boolean) => {
-         this.router.navigate(['/']);
-     });
-  }
-
-
-  /*
-
-  TODO 4: Saving a Customer Object
-
-  1. Create a new function named onSubmit()
-  
-  2. Add the following code into onSubmit() to pass
-     the customer object to DataService's updateCustomer() function.
-  
-     this.dataService.updateCustomer(this.customer)
-       .subscribe((status: boolean) => {
-         this.router.navigate(['/']);
-     });
-  
-  */
   
   
   
@@ -118,7 +91,7 @@ export class CustomerEditComponent implements OnActivate {
   
   /*
 
-  TODO 5: Navigating to the Root Route
+  TODO 4: Navigating to the Root Route
 
   Add code into the onCancel() function to navigate to the "/"
   route using the router object's navigate() function.
