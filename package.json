@@ -1,5 +1,5 @@
 {
-  "name": "folderCopier",
+  "name": "foldercopier",
   "version": "1.0.0",
   "description": "Copies source code from destination folder into lab folders and overlays specific lab files.",
   "author": "Dan Wahlin",
@@ -8,6 +8,6 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "fs-extra": "^0.8.1"
+    "fs-extra": "^0.30.0"
   }
 }
