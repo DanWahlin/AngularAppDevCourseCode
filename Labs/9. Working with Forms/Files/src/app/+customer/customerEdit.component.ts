@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouteSegment, RouteTree, OnActivate } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { DataService } from '../shared/services/data.service';
 import { ICustomer, IState } from '../shared/interfaces';
@@ -9,7 +9,7 @@ import { ICustomer, IState } from '../shared/interfaces';
   selector: 'customer-edit',
   templateUrl: 'customerEdit.component.html'
 })
-export class CustomerEditComponent implements OnActivate {
+export class CustomerEditComponent implements OnInit {
 
   /*
 
@@ -18,7 +18,8 @@ export class CustomerEditComponent implements OnActivate {
   1. Take a moment to look at the customer property below. Note the properties
      that it exposes such as firstName, lastName, address, etc.
      
-  2. Notice that Router and DataService objects are injected into the constructor.
+  2. Notice that Router, ActivatedRoute and DataService objects are injected 
+     into the constructor.
 
   */
 
@@ -37,31 +38,50 @@ export class CustomerEditComponent implements OnActivate {
   };
   states: IState[];
   
-  constructor(private router: Router, private dataService: DataService) { }
+  constructor(private router: Router, 
+              private route: ActivatedRoute, 
+              private dataService: DataService) { }
 
   /*
 
   TODO 2: Retrieving a Customer Object
 
-  1. Note that CustomerEditComponent implements OnActivate.
+  1. Note that CustomerEditComponent implements OnInit.
   
-  2. Add the following code into the routerOnActivate() function to:
+  2. Add the following code into the ngOnInit() function to:
+
      a. Access the target customer id from the parent route
      b. Pass the customer id to the DataService's getCustomer() function
      c. Retrieve states
      
-      const id = +currTree.parent(current).getParam('id');
+      const id = +this.router.routerState.parent(this.route).snapshot.params['id'];
       this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
         //Quick and dirty clone used in case user cancels out of form
         const cust = JSON.stringify(customer);
         this.customer = JSON.parse(cust);
       });
-      this.dataService.getStates().subscribe((states: IState[]) => this.states = states);
+      
+
+   3. Immediately AFTER the previous code (still in ngOnInit) add code to 
+      do the following:
+      
+      a. Call dataService's getStates() function.
+
+      b. Subscribe to the Observable that is returned from getStates(). When creating
+         the subscribe use an arrow function that accepts the following parameter:
+      
+         states: IState[]
+
+      c. Assign the states parameter value that's returned to the component's
+         states property.
+
+         Note: If you need help with the previous steps refer to the course manual 
+         (the Http section) or to the lab's end solution code. The next TODO
+         may also provide a hint to help with completing this step.
   
   */
 
-  routerOnActivate(current: RouteSegment, prev?: RouteSegment,
-      currTree?: RouteTree, prevTree?: RouteTree) {
+  ngOnInit() {
 
 
 
@@ -99,7 +119,7 @@ export class CustomerEditComponent implements OnActivate {
   Hint: The navigate() function expects a parameter that is very
         similar to the routerLink directive value that you used
         in previous labs. Refer to the End solution or the Angular
-        documentation if you need help.
+        documentation if you need help (or the previous step :-)).
   
   */
   

@@ -11,7 +11,7 @@ export class DashReplacerPipe {
 @Component({
   selector: 'app-container',
   template: `
-    <h1>Using Angular Pipes</h1>
+    <h1>Angular 2 Pipes</h1>
     <br />
     Uppercase: {{ message | uppercase }}
     <br />

@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 
   TODO 1: Importing Routing Objects
 
-  Import the following objects from the @angular/router module. 
+  Import the following object from the @angular/router module. 
           
-  Router, Routes, ROUTER_DIRECTIVES, RouteSegment, OnActivate, RouteTree
+  Router, ROUTER_DIRECTIVES
 
 */
 
@@ -31,31 +31,6 @@ import { CustomerEditComponent } from './customerEdit.component';
   selector: 'orders',
   templateUrl: 'customer.component.html'
 })
-
-/*
-
-  TODO 3: Define Child Routes
-
-  Define the following child routes using the Routes decorator:
-
-  Path            Component
-
-  /orders         CustomerOrdersComponent
-  /details        CustomerDetailsComponent
-  /edit           CustomerEditComponent
-
-*/
-
-
-
-
-/*
-
-  TODO 4: Implement the OnActivate Interface on a Component Class
-
-  Implement the OnActivate interface on the CustomerComponent class.
-
-*/
 export class CustomerComponent {
   
     displayMode: CustomerDisplayModeEnum;
@@ -64,34 +39,29 @@ export class CustomerComponent {
   
     /*
 
-      TODO 5: Inject Router
+      TODO 3: Inject Router
 
       Inject Router into the contructor. Give the constructor parameter 
       a name of "router" and make it private.
-      
-      Note: Router isn't currently being used. However, by injecting it 
-      we can easily use it to do redirects if needed in the future.
 
     */
     constructor() { }
     
     /*
 
-      TODO 6: Inspect the routerOnActivate() Function
+      TODO 4: Inspect the ngOnInit() Function
 
-      Take a moment to look at the code in the routerOnActivate()
+      Take a moment to look at the code in the ngOnInit()
       function below. 
       
-      The currTree.children(current)[0].stringifiedUrlSegments;
-      code allows us to retrieve the name of the child route and then set
-      the appropriate display mode to show customer details, orders or the 
-      edit screen.
+      The this.router.url.split('/')[3]; code allows us to retrieve the 
+      name of the child route and then set the appropriate display mode 
+      to show customer details, orders or the edit screen.
 
     */
     
-    routerOnActivate(current: RouteSegment, prev?: RouteSegment,
-      currTree?: RouteTree, prevTree?: RouteTree) {
-      var path = currTree.children(current)[0].stringifiedUrlSegments;
+    ngOnInit() {
+      const path = this.router.url.split('/')[3];
       switch (path) {
         case 'details':
           this.displayMode = CustomerDisplayModeEnum.Details;

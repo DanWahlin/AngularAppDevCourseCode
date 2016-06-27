@@ -5,7 +5,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 TODO 1: Importing Custom Pipes
 
-Import the following pipes:
+Import the following pipes below this comment:
 
    CapitalizePipe   ../shared/pipes/capitalize.pipe
    TrimPipe         ../shared/pipes/trim.pipe
@@ -27,7 +27,7 @@ Add CapitalizePipe and TrimPipe into the component using the pipes property.
   moduleId: module.id,
   selector: 'customers-card', 
   templateUrl: 'customersCard.component.html',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ ROUTER_DIRECTIVES ],
 
   //When using OnPush detectors, then the framework will check an OnPush 
   //component when any of its input properties changes, when it fires 

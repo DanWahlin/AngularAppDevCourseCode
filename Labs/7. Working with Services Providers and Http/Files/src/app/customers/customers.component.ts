@@ -54,7 +54,7 @@ export class CustomersComponent implements OnInit {
 
     TODO 3: Subscribing to an Observable
     
-    Add the following code below (in the onInit() function):
+    Add the following code below the TODO comment:
     
     this.dataService.getCustomers()
 
@@ -64,15 +64,17 @@ export class CustomersComponent implements OnInit {
       1. After the getCustomers() function add a call to subscribe().
       
       2. The subscribe() function should use an arrow function that accepts
-         customers: ICustomer[] as the type.
+         the following parameter:
+
+         customers: ICustomer[]
          
-      3. The body of the arrow function should do the following 
-         with the data it receives:
+      3. The body of the arrow function should assign the customers that are
+         received to properties in the component:
       
          this.customers = this.filteredCustomers = customers;
          
       Note: If you need help with this step refer to the course manual or 
-            to lab's End folder for details on getting to the source code.
+            to the lab's End folder for details on getting to the source code.
 
     */
 

@@ -11,7 +11,8 @@
     2. Add a local template variable to the <form> tag named "customerForm" 
        that has a value of "ngForm".
        
-       Hint: Use the # character to create the local variable.
+       Hint: Use the # character to create the local variable. Refer to the
+       course manual or to the lab's end solution if you need help.
     
 -->
 
@@ -25,36 +26,39 @@
         Perform the following steps to add Angular form functionality 
         to the form's <input> controls:
         
-        1. Locate the <input> for firstName below and note the different 
-           directives and the local variable that is defined on it.
+        1. Locate the <input> for firstName below and note that is has the following:
+
+           a. A name attribute that matches the property name the input is bound to.
+           b. A "two-way"" binding created using the [(ngModel)] binding.
+           c. A #firstName local template variable assigned to NgModel.
            
         2. Following the example shown on the firstName <input> element, 
            update the other <input> controls to have the following functionality:
           
-          c. Add an ngModel "two-way binding" that binds to the appropriate customer 
-             object property. 
+          a. Add a name attribute that is assigned a value that matches with the
+             name of the property that ngModel binds to. For example, if
+             ngModel binds to customer.firstName then you would add: name="firstName"
           
-          a. Add the ngControl directive to each <input> and assign it the 
-             appropriate value (lastName, address, etc.) depending on the 
-             control and the customer property that it binds to.
+          b. Add an ngModel "two-way" binding that binds to the appropriate customer 
+             object property. 
               
-          b. Add a local template variable (hint: use #varName). Give it a name that 
-             matches the value you assigned to ngControl in the previous step 
-             (lastName, address, etc.) as appropriate for each <input>.
+          c. Add a local template variable (hint: use #varName). Assign the 
+             template variable a value of "ngModel".
               
         3. Bind each <div class="alert alert-danger"> tag's "hidden" property
-           to the respective local variable name. Follow the same pattern
-           shown in the Name section below.
+           to the respective local variable name on the input that the error div
+           is associated with. Follow the same pattern that is shown in the Name 
+           section below.
         
     -->
     
     <div class="form-group">
       <label>Name</label>
       <input type="text" 
-             class="form-control" 
-             ngControl="firstName" 
-             #firstName="ngForm" 
+             class="form-control"
+             name="firstName"
              [(ngModel)]="customer.firstName" 
+             #firstName="ngModel"  
              required>
       <div class="alert alert-danger" [hidden]="firstName.valid">First Name is required</div>
     </div>
@@ -77,7 +81,7 @@
       <label>State</label>
       <select class="form-control" 
               [(ngModel)]="customer.state.abbreviation"
-              ngControl="state" 
+              name="state" 
               required>
           <option *ngFor="let state of states" [ngValue]="state.abbreviation">{{state.name}}</option>
       </select>
@@ -90,12 +94,12 @@
         1. Bind the first <button> tag below to the "click" event using 
            event binding. Assign it a value of:
            
-           "onCancel($event)"
+           onCancel($event)
            
-        2. Bind to the second <button> tag's "disabled" property using property
+        2. Bind the second <button> element to the "disabled" property using property
            binding. Assign it a value of:
            
-           "!customerForm.form.valid"
+           !customerForm.valid
            
     -->
     

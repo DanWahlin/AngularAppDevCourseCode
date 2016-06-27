@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-container',
   template: `
-    <h1></h1>
+    <h1>Angular 2 Pipes</h1>
   `
 })
 export class AppComponent implements OnInit {

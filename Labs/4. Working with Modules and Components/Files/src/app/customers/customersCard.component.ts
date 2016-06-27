@@ -13,7 +13,7 @@ TODO 1: Add an Input Property to the Class
 1. Import the Input decorator from the @angular/core module (you can add it above).
 
 2. Add an input property (ensure that you use the @Input() decorator)
-   into the CustomersCardComponent class using the following information:
+   into the CustomersCardComponent class below using the following information:
    
 Property Name:          customers
 Property Type:          ICustomer[]

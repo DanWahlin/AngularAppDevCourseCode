@@ -4,16 +4,29 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { DataService } from '../shared/services/data.service';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
-import { CustomersCardComponent } from './customersCard.component';
-import { CustomersGridComponent } from './customersGrid.component'
 import { ICustomer, IOrder } from '../shared/interfaces';
 
 /*
 
-TODO: Add CustomersCardComponent and CustomersGridComponent as a Child Components
+TODO 1: Import CustomersCardComponent and CustomersGridComponent 
+
+Import the following custom components immediately after the TODO comment:
+
+CustomersCardComponent    ./customersCard.component
+CustomersGridComponent    ./customersGrid.component
+
+*/
+
+
+
+
+/*
+
+TODO 2: Add CustomersCardComponent and CustomersGridComponent as a Child Components
 
 Add CustomersCardComponent and CustomersGridComponent to the directives 
-property array in the Component decorator.
+property array in the Component decorator so that they're available to use
+in the template.
 
 */
 
@@ -21,7 +34,7 @@ property array in the Component decorator.
   moduleId: module.id,
   selector: 'customers', 
   templateUrl: 'customers.component.html',
-  directives: [ROUTER_DIRECTIVES, FilterTextboxComponent]
+  directives: [ ROUTER_DIRECTIVES, FilterTextboxComponent ]
 })
 export class CustomersComponent implements OnInit {
 

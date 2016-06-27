@@ -18,19 +18,19 @@ TODO 1: Modifying the CustomersComponent Class
    
 3. Take a moment to examine the @Component decorator properties:
    a. The moduleId is set to module.id so that Angular knows the 
-      relative path for the component (simplifies the template path)
-   b. The selector is set to 'customers' which means <customers></customers> is used
+      relative path for the component (it simplifies the template path).
+   b. The selector is set to 'customers' which means <customers></customers> is used.
    c. Custom components and directives used by the component are defined so that
       the template/view renders everything correctly.
+
+4. Add a templateUrl property into the @Component decorator with the following value:
+  
+   customers.component.html
    
-4. Implement the OnInit interface on the CustomersComponent class below.
+5. Implement the OnInit interface on the CustomersComponent class below.
    This requires performing the following steps:
    a. Use the implements keyword on the class definition to implement the interface.
    b. Add the ngOnInit() function into the class
-   
-5. Add a templateUrl property into the @Component decorator with the following value:
-  
-   customers.component.html
 
 6. Add the following code into the ngOnInit() function to initialize property values
    and retrieve data (more on retrieving data later in the course - we need this
@@ -51,8 +51,8 @@ TODO 1: Modifying the CustomersComponent Class
   moduleId: module.id,
   selector: 'customers', 
 
-  directives: [ROUTER_DIRECTIVES, FilterTextboxComponent, 
-               CustomersCardComponent, CustomersGridComponent]
+  directives: [ ROUTER_DIRECTIVES, FilterTextboxComponent, 
+               CustomersCardComponent, CustomersGridComponent ]
 })
 export class CustomersComponent  {
 

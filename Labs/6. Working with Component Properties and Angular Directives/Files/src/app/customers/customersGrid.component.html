@@ -12,15 +12,13 @@
 
                         Add an event binding to the first <th> below to bind
                         the click event to a sort() function defined in the
-                        component code. Pass 'firstName' into the sort() function
-                        that the click event binds to as shown next:
-                        
-                        sort('firstName')
+                        component code. Pass a value of 'firstName' into the 
+                        sort() function that the click event binds to.
                         
                         OPTIONAL: If time permits add the click event binding 
                         to the sort() function for the remaining <th> elements. 
                         Here's the respective values that should be passed into sort() 
-                        for each <th>:
+                        for each <th> element:
                             
                         lastName
                         address
@@ -60,13 +58,13 @@
                         <tr>
                             <td><img src="images/{{ customer.gender | lowercase }}.png"
                                     class="card-image" alt="Customer Image" /></td>
-                            <td><a [routerLink]="['/customer',customer.id,'details']">{{ customer.firstName | capitalize }}</a></td>
+                            <td><a [routerLink]="['/customers',customer.id,'details']">{{ customer.firstName | capitalize }}</a></td>
                             <td>{{ customer.lastName | capitalize }}</td>
                             <td>{{ customer.address }}</td>
                             <td>{{ customer.city | trim }}</td>
                             <td>{{ customer.state.name }}</td>
                             <td>{{ customer.orderTotal | currency:'USD':true }}</td>
-                            <td><a [routerLink]="['/customer',customer.id,'orders']">View Orders</a></td>
+                            <td><a [routerLink]="['/customers',customer.id,'orders']">View Orders</a></td>
                         </tr>
                         <tr *ngIf="!customers.length">
                             <td>&nbsp;</td>

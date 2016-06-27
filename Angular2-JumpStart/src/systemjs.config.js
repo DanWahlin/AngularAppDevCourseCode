@@ -13,11 +13,12 @@
     'rxjs':                       { defaultExtension: 'js' }
   };
 
-  var packageNames = [
+  var ngPackageNames = [
     '@angular/common',
     '@angular/compiler',
     '@angular/core',
     '@angular/http',
+    '@angular/forms',
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
@@ -27,7 +28,7 @@
   ];
 
   // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
-  packageNames.forEach(function(pkgName) {
+  ngPackageNames.forEach(function(pkgName) {
     packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
   });
 

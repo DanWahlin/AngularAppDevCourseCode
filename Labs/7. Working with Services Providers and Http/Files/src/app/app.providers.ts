@@ -9,8 +9,7 @@ HTTP_PROVIDERS
 */
 
 import { bind } from '@angular/core';
-import { FORM_PROVIDERS, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ROUTER_PROVIDERS } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { Sorter } from './shared/utils/sorter';
 import { DataService } from './shared/services/data.service';
@@ -28,7 +27,5 @@ export const APP_PROVIDERS = [
     Sorter,
     DataService,
     TrackByService,
-    FORM_PROVIDERS,
-    ROUTER_PROVIDERS,
     //bind(LocationStrategy).toClass(HashLocationStrategy)
 ];

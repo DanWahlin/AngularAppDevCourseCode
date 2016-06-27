@@ -1,8 +1,9 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { bind, enableProdMode, provide } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { APP_ROUTER_PROVIDERS } from './app.routes';
 
 //enableProdMode(); //Uncomment for production
 
-//Bootstrap code goes here
+//Bootstrap Code Goes Here

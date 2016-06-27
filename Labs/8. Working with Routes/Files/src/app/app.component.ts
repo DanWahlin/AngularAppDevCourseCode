@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 
 /*
 
-  TODO 1: Importing Router Objects
+  TODO 1: Import Router Objects
 
-  Import the following objects from @angular/router: 
-          
-  ROUTER_DIRECTIVES  
-  Routes
-  Router
+  Import ROUTER_DIRECTIVES from @angular/router: 
 
 */
 
@@ -37,38 +33,7 @@ import { APP_PROVIDERS } from './app.providers';
   selector: 'app-container',
   providers: [ APP_PROVIDERS ]
 })
-
-/*
-
-TODO 3: Define Routes
-
-  Define the following application routes using the Routes decorator:
-
-  Path            Component
-
-  /               CustomersComponent
-  /customer/:id   CustomerComponent
-  '*'             CustomersComponent
-
-*/
-
-
 export class AppComponent {
-  
-  /*
 
-    TODO 4: Inject the Router
-
-    Inject Router into the contructor. Give the constructor parameter 
-    a name of "router" and make it private.
-    
-    Note: Router isn't currently being used. However, by injecting it 
-    we can easily use it to do redirects if needed in the future.
-  
-
-  */
-  constructor() {
-
-  }
   
 }
