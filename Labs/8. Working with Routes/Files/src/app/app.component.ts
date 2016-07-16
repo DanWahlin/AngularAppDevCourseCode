@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 
 import { CustomersComponent } from './customers/customers.component';
-import { CustomerComponent } from './+customer/customer.component';
+import { CustomerComponent } from './customer/customer.component';
 import { APP_PROVIDERS } from './app.providers';
 
 /*

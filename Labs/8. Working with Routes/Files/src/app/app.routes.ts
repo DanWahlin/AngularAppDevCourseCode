@@ -4,7 +4,7 @@
 
   Import provideRouter and RouterConfig from @angular/router
   Import CustomersRoutes from ./customers/customers.routes
-  Import CustomerRoutes from  ./+customer/customer.routes
+  Import CustomerRoutes from  ./customer/customer.routes
 
 */
 

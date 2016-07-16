@@ -16,7 +16,7 @@
   into the CustomersRoutes array below:
 
   path:        ''
-  terminal:    true
+  pathMatch:   'full'
   redirectTo:  '/customers'
 
 */

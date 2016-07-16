@@ -1,13 +1,14 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
 import { CustomersRoutes } from './customers/customers.routes';
-import { CustomerRoutes } from './+customer/customer.routes';
+import { CustomerRoutes } from './customer/customer.routes';
 
-const appRoutes: RouterConfig = [
+export const App_Routes: RouterConfig = [
   ...CustomersRoutes,
-  ...CustomerRoutes
+  ...CustomerRoutes,
+  { path: '**', pathMatch:'full', redirectTo: '/customers' } //catch any unfound routes and redirect to home page
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(appRoutes)
+  provideRouter(App_Routes)
 ];
