@@ -13,17 +13,17 @@
 
 /*
 
-  TODO 2: Add Custom Routes to the appRoutes Array
+  TODO 2: Add Custom Routes to the APP_ROUTES Array
 
   1. Add the CustomersRoutes and CustomerRoutes objects into the
-     appRoutes array below. 
+     APP_ROUTES array below. 
   
   2. Add the ES6 "spread" operator (hint: ...) in front of each object name within the array.
 
 */
 
 
-const appRoutes: RouterConfig = [
+const APP_ROUTES: RouterConfig = [
 
 ];
 
@@ -39,5 +39,5 @@ const appRoutes: RouterConfig = [
 */
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(appRoutes)
+  provideRouter(APP_ROUTES)
 ];
