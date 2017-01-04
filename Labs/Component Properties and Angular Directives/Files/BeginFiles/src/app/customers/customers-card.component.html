@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row card-container">
+        <!--
+
+            TODO 1: Use ngFor to Iterate Through Customers
+
+            1. Add an ngFor directive to the first <div> element immediately below that
+               iterates through the array of customers exposed by the component class.
+               Name the ngFor variable "customer".
+
+            2. Add the following code immediately AFTER the customer property in
+               the ngFor (inside of the quotes):
+               
+               ;trackBy:trackbyService.customer
+
+        -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <a [routerLink]="['/customers',customer.id,'details']" class="white">
+                        {{customer.firstName | capitalize }} {{ customer.lastName | capitalize }} 
+                    </a>
+                    <a [routerLink]="['/customers',customer.id,'edit']">
+                        <i title="Edit"  
+                           class="pull-right glyphicon glyphicon-edit edit-icon white"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="pull-left card-body-left">
+                            <a href="#" class="white">
+                                <img src="images/{{customer.gender | lowercase}}.png" class="card-image" />
+                            </a>
+                        </div>
+                        <div class="pull-left card-body-right">
+                            <div class="card-body-content">{{customer.city | trim }}, {{customer.state.name}}</div>
+                            <a [routerLink]="['/customers',customer.id,'orders']">View Orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+
+            TODO 2: Use the ngIf Directive
+
+            Add an ngIf directive to the <div> below that shows the div
+            if there are no customers. In other words, if customers.length is 0
+            then show the div.
+
+        -->
+        <div>
+            No Records Found
+        </div>
+    </div>
+</div>

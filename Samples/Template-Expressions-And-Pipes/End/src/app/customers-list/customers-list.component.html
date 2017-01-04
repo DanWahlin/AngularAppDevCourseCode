@@ -1,0 +1,10 @@
+<h1>{{ title }}</h1>
+<ul>
+    <li>{{ customers[0].name | capitalize }} {{ customers[0].customerSince | date | uppercase }}</li>
+    <li>Supna</li>
+    <li>Michelle</li>
+</ul>
+<br />
+Number of Customers: {{ customers.length }}
+<br />
+Total of Orders: {{ customersOrderTotal | currency:currencyCode:true }}

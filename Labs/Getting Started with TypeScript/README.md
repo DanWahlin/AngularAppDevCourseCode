@@ -1,0 +1,1 @@
+This lab uses on online resource at http://typescriptlang.org. Refer to the lab manual for more details.

@@ -1,1 +1,0 @@
-This lab uses the CourseFiles/Angular2-Jumpstart folder. Refer to the lab manual for more details.

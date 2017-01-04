@@ -1,0 +1,29 @@
+<h1>{{ title }}</h1>
+<br />
+<filter-textbox (changed)="filter($event)"></filter-textbox>
+<br />
+<br />
+<table class="table table-striped">
+    <tr>
+        <th sortby="name" (sorted)="sort($event)">Name</th>
+        <th sortby="city" (sorted)="sort($event)">City</th>
+        <th (click)="sort('orderTotal')">Order Total</th>
+    </tr>
+    <tr *ngFor="let cust of filteredCustomers">
+        <td>{{ cust.name | capitalize }}</td>
+        <td>{{ cust.city }}</td>
+        <td>{{ cust.orderTotal | currency:currencyCode:true }}
+    </tr>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+        <td>
+            {{ customersOrderTotal | currency:currencyCode:true }}
+        </td>
+    </tr>
+    <tr *ngIf="!filteredCustomers || !filteredCustomers.length">
+        <td colspan="4">No customers found</td>
+    </tr>
+</table>
+<br />
+Number of Customers: {{ filteredCustomers.length }}
+<br />

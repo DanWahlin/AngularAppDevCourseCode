@@ -1,1 +1,0 @@
-This lab uses on online resource. Refer to the lab manual for more details.

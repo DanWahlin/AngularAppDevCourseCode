@@ -1,1 +1,0 @@
-The final source code for this lab can be found in the Angular2-BareBones folder at the root of your course files.

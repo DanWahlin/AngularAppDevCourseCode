@@ -1,0 +1,1 @@
+This lab uses the Angular-HelloWorld-master folder. Refer to that folder for the end solution for this lab.

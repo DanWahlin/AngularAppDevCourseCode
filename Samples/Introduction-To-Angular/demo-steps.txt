@@ -1,0 +1,5 @@
+Demo Steps:
+
+1. Open the project in the Begin folder
+2. Open src/app/app.component.ts and add a selector and template
+3. Open index.html and add the component selector's tag into the existing <main> tag

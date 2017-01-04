@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row card-container">
+        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let customer of customers;trackBy:trackbyService.customer">
+            <div class="card">
+                <div class="card-header">
+        <!--
+
+            TODO 1: Render the Customer's firstName and lastName Properties
+
+            1. Locate the empty <a class="white"> anchor element below.
+
+            2. Render the customer's firstName and lastName properties inside
+               of the anchor tags using data binding syntax: {{ }}
+
+            3. Apply the capitalize pipe to both properties.
+
+            4. Find the {{ customer.gender }} binding below (on an <img> tag) and 
+               add the lowercase pipe.
+
+        -->
+                    <a [routerLink]="['/customers',customer.id,'details']" class="white">
+ 
+                    </a>
+                    <a [routerLink]="['/customers',customer.id,'edit']">
+                        <i title="Edit"  
+                           class="pull-right glyphicon glyphicon-edit edit-icon white"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="pull-left card-body-left">
+                            <a href="#" class="white">
+                                <img src="images/{{ customer.gender }}.png" class="card-image" />
+                            </a>
+                        </div>
+                        <div class="pull-left card-body-right">
+        <!--
+
+            TODO 2: Use the Custom trim Pipe
+
+            Locate the {{ customer.city }} binding below and add the trim pipe to it.
+
+        -->
+                            <div class="card-body-content">{{ customer.city }}, {{ customer.state.name }}</div>
+                            <a [routerLink]="['/customers',customer.id,'orders']">View Orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!customers.length">
+            No Records Found
+        </div>
+    </div>
+</div>

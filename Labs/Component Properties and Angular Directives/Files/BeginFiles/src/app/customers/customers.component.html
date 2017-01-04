@@ -1,0 +1,143 @@
+<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon glyphicon-user"></span>
+                {{ title }}
+            </h3>
+        </header>
+        <br />
+        <div class="row">
+            <div class="col-md-10">
+                <div class="navbar">
+                    <ul class="nav navbar-nav">
+        <!--
+
+            TODO 1:  Exploring Property and Event Bindings
+ 
+            1. Locate the first <a> tag below (inside of the first <li>). Add a click event
+               binding that calls the following function to change the display to show the card view:
+
+               changeDisplayMode(displayModeEnum.Card)
+
+            2. Add another binding on the <a> tag to add the "active" CSS class when the following condition is met.
+
+               displayMode === displayModeEnum.Card
+               
+               Hint: Use [class.active]
+
+            3. Notice that each <a> tag below has its own (click) event bound to a changeDisplayMode() 
+               function. The type of data/view that should be displayed is controlled by the 
+               enumeration value passed to the function (Card, Grid or Map).
+
+            4. Note that an "active" CSS class is set on the <a> tags if the displayMode 
+               condition matches by using the [class.active] binding.
+
+        -->
+                        <li class="toolbar-item">
+                            <a>
+                                <span class="glyphicon glyphicon-th-large"></span> Card View
+                            </a>
+                        </li>
+                        <li class="toolbar-item">
+                            <a (click)="changeDisplayMode(displayModeEnum.Grid)" [class.active]="displayMode === displayModeEnum.Grid">
+                                <span class="glyphicon glyphicon-align-justify"></span> List View
+                            </a>
+                        </li>
+                        <li class="toolbar-item">
+                            <a (click)="changeDisplayMode(displayModeEnum.Map)" [class.active]="displayMode === displayModeEnum.Map">
+                                <span class="glyphicon glyphicon-map-marker"></span> Map View
+                            </a>
+                        </li>
+                        <li class="toolbar-item">
+                            <a routerLink="/customers/0/edit">
+                                <span class="glyphicon glyphicon-plus"></span> New Customer
+                            </a>
+                        </li>
+                    </ul>
+                    <cm-filter-textbox class="navbar-right"
+                     (changed)="filterChanged($event)"></cm-filter-textbox>
+                </div>
+            </div>
+        </div>
+
+        <!--
+
+            TODO 2:  Use the CustomersCard Component as a Child Component
+ 
+            1. Add the CustomersCardComponent element below (you'll need to use
+               the selector defined in the Component decorator).
+
+            2. Bind the customers property of the element to a property named 
+               filteredCustomers using property binding syntax.
+
+            3. Bind the hidden property of the child component to the following
+               expression using property binding syntax:
+               
+               displayMode !== displayModeEnum.Card
+
+        -->
+
+
+
+        <!--
+
+            TODO 3:  Use the CustomersGrid Component as a Child Component
+            
+            Another child component is available in the app named 
+            CustomersGridComponent. In this TODO you'll add it to the view.
+
+            1. Add the CustomersGrid component element below (you'll need to use
+               the selector defined in the Component decorator).
+
+            2. Bind the customers property of the element to a property named 
+               filteredCustomers using property binding syntax.
+
+            3. Bind the hidden property of the child component to the following
+               expression using property binding syntax:
+               
+               displayMode !== displayModeEnum.Grid
+
+        -->
+
+
+
+        <!--
+
+            TODO 4:  Exploring the Map Component 
+            
+            Open src/app/shared/map/map.component.ts and take a moment to explore the code.
+            This component is responsible for rendering the customer locations using Google Maps.
+
+            Notice how the component exposes several Input properties.
+
+        -->
+
+        <cm-map *ngIf="filteredCustomers.length" 
+            [zoom]="2" 
+            [enabled]="displayMode === displayModeEnum.Map" 
+            [hidden]="displayMode !== displayModeEnum.Map">
+          <cm-map-point 
+            *ngFor="let customer of filteredCustomers" 
+            [latitude]="customer.latitude" 
+            [longitude]="customer.longitude"
+            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</a></h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
+        </cm-map>
+
+        <!--
+
+            TODO 5:  Exploring the Pagination Component
+            
+            Open src/app/shared/pagination/pagination.component.ts and take a moment to explore the code.
+            This component is responsible for rendering the data "pager" in the view.
+
+            Notice how the component exposes several Input properties and an Output property.
+        -->
+
+        <cm-pagination
+            [totalItems]="totalRecords" 
+            [pageSize]="pageSize" 
+            (pageChanged)="pageChanged($event)"></cm-pagination>
+          
+    </div>
+</div>

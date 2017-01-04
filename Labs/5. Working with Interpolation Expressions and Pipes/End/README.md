@@ -1,1 +1,0 @@
-This instructor-led lab uses an online resource located at http://tinyurl.com/ng2Starter.
