@@ -78,36 +78,37 @@ downloadAndExtractProjects(function(err) {
     //     overlayFiles(sampleFolder);
     // });
 
-    //Lab 1
-    copyFolder('./Angular-HelloWorld-master', './Labs/Getting Started with Angular/Begin');
-    overlayFiles('./Labs/Getting Started with Angular');
+    // //Lab 1
+    // copyFolder('./Angular-HelloWorld-master', './Labs/Getting Started with Angular/Begin');
+    // overlayFiles('./Labs/Getting Started with Angular');
 
-    //Lab 2 (TypeScript - instructor-led)
+    // //Lab 2 (TypeScript - instructor-led)
 
-    //Lab 3 (Uses the Angular-JumpStart-master source code)
+    // //Lab 3 (Uses the Angular-JumpStart-master source code)
 
-    //Lab 4
-    copyFolder('./Angular-JumpStart-master', './Labs/Components and Modules/Begin');
-    overlayFiles('./Labs/Components and Modules');
+    // //Lab 4
+    // copyFolder('./Angular-JumpStart-master', './Labs/Components and Modules/Begin');
+    // overlayFiles('./Labs/Components and Modules');
 
-    //Lab 5
-    copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/BeginPipesAndBindings');
-    copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/EndPipesAndBindings');
-    overlayFiles('./Labs/Interpolation Expressions and Pipes', [ { from:'Files/BeginPipesAndBindingsFiles', to: 'BeginPipesAndBindings',  }, { from: 'Files/EndPipesAndBindingsFiles', to: 'EndPipesAndBindings' }]);
+    // //Lab 5
+    // copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/BeginPipesAndBindings');
+    // copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/EndPipesAndBindings');
+    // overlayFiles('./Labs/Interpolation Expressions and Pipes', [ { from:'Files/BeginPipesAndBindingsFiles', to: 'BeginPipesAndBindings',  }, { from: 'Files/EndPipesAndBindingsFiles', to: 'EndPipesAndBindings' }]);
 
-    copyFolder('./Angular-JumpStart-master', './Labs/Interpolation Expressions and Pipes/Begin');
-    overlayFiles('./Labs/Interpolation Expressions and Pipes');
+    // copyFolder('./Angular-JumpStart-master', './Labs/Interpolation Expressions and Pipes/Begin');
+    // overlayFiles('./Labs/Interpolation Expressions and Pipes');
 
-    //Lab 6
-    copyFolder('./Angular-JumpStart-master', './Labs/Component Properties and Angular Directives/Begin');
-    overlayFiles('./Labs/Component Properties and Angular Directives');
+    // //Lab 6
+    // copyFolder('./Angular-JumpStart-master', './Labs/Component Properties and Angular Directives/Begin');
+    // overlayFiles('./Labs/Component Properties and Angular Directives');
 
-    //Lab 7
-    copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and Http/Begin');
-    overlayFiles('./Labs/Services Providers and Http');
+    // //Lab 7
+    // copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and Http/Begin');
+    // overlayFiles('./Labs/Services Providers and Http');
 
     //Lab 8
-
+    copyFolder('./Angular-JumpStart-master', './Labs/Working with Routing/Begin');
+    overlayFiles('./Labs/Working with Routing');
 
     //Lab 9
 

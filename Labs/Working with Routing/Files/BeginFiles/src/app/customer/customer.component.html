@@ -1,0 +1,70 @@
+<div class="orders view">
+    <div class="container">
+        <header>
+            <h3><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Customer Information</h3>
+        </header>
+        <br />
+        <div class="navbar">
+            <ul class="nav navbar-nav">
+                <li class="toolbar-item">
+                    <!--
+                        
+                        TODO 1: Add routerLink and routerLinkActive Directives
+                        
+                        1. Add a routerLink directive to the <a> tag immediately 
+                           below the  TODO comment. It should be assigned a value of "details".
+                           
+                        2. Add a routerLinkActive directive to the same <a> tag. It should be
+                           assigned a value of "active". 
+                           
+                           When the router detects that the browser is on the "details" route it 
+                           will automatically add the "active" CSS class to the anchor tag.
+                        
+                    -->
+                    <a>
+                       <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Customer Details
+                    </a>
+                </li>
+                <li class="toolbar-item">
+                    <a routerLink="orders" routerLinkActive="active">
+                        <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Customer Orders
+                    </a>
+                </li>
+                <li class="toolbar-item">
+                    <a routerLink="edit" routerLinkActive="active">
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Customer
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <!--
+                
+                TODO 2: Add the RouterOutlet Directive
+                
+                Add the <router-outlet> directive below. This is where child routes will be loaded into.
+                
+            -->
+
+
+            <br />
+            <br />
+
+            <!--
+                
+                TODO 3: Add a routerLink Directive
+             
+                Add a routerLink directive to the <a> tag below. 
+                It should be assigned a value of "/customers".
+                
+            -->
+            <a>View all Customers</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
