@@ -106,7 +106,7 @@ downloadAndExtractProjects(function(err) {
     copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and Http/Begin');
     overlayFiles('./Labs/Services Providers and Http');
 
-    Lab 8
+    //Lab 8
     copyFolder('./Angular-JumpStart-master', './Labs/Working with Routing/Begin');
     overlayFiles('./Labs/Working with Routing');
 
