@@ -7,20 +7,6 @@ var fse = require('fs-extra'),
     fs = require('fs'),
     AdmZip = require('adm-zip');
 
-// function copyIntoDirectories(srcDir, startDir, copyToSubFolderName, dirsToIgnore) {
-//     //Iterate through directories
-//     fse.readdirSync(startDir).forEach(function (dir) {
-//         var directory = startDir + '/' + dir,
-//             stat = fse.lstatSync(directory);
-
-//         if (stat.isDirectory()) {
-//             if (dirsToIgnore.indexOf(dir) === -1) { //Make sure the ignoreDirs aren't involved in the copy operations
-//                 copyIntoDirectory(srcDir, directory, copyToSubFolderName, overlayFolder);
-//             }
-//         }
-//     });
-// }
-
 function copyFolder(fromDir, toDir) {
     fse.copySync(fromDir, toDir);
     console.log('Copied ' + fromDir + ' to ' + toDir);
