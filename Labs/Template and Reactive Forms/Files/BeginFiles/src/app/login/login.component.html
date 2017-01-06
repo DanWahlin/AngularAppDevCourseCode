@@ -1,0 +1,76 @@
+<div class="view">
+    <div class="container">
+        <header>
+            <h3><span class="glyphicon glyphicon-lock"></span> Login</h3>
+        </header>
+        <br />
+        <!--
+            
+            TODO 1: Adding Directives to a <form> Control
+            
+            Perform the following steps to add Angular Reactive forms functionality 
+            to the <form> tag:
+            
+            1. Bind the <form> tag's ngSubmit event to the "submit()" function in the component 
+               code using event binding.
+            
+            2. Add the following reactive forms directive to the form. This directive will bind to a 
+               property named loginForm that is defined in the component class (it's the FormGroup):
+
+               [formGroup]="loginForm"
+            
+        -->
+        <form class="login-form" novalidate>
+            <div class="login">
+                <div class="row">
+                    <div class="col-md-2">
+                        Email:
+                    </div>
+                    <div class="col-md-10">
+
+                    <!--
+                        
+                        TODO 2: Exploring Reactive Form Controls
+
+                        Note that the following email <input> binds to the associated FormGroup control by using the
+                        formControlName directive. You can access the status of the control (touched/untouched, valid/invalid, etc.)
+                        through the FormGroup name, loginForm.controls.email.touched for example, as shown below. 
+
+                    --> 
+
+                        <input type="email" name="email" class="form-control" formControlName="email" required />
+                        <div class="alert alert-danger" [hidden]="loginForm.controls.email.untouched || loginForm.controls.email.valid">
+                            A valid email address is required
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        Password:
+                    </div>
+                    <div class="col-md-10"> 
+                        <input type="password" name="password" class="form-control" formControlName="password" required />
+                        <div class="alert alert-danger" [hidden]="loginForm.controls.password.untouched || loginForm.controls.password.valid">
+                            Password is required (one number required and must be 6 or more characters)
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+                <br />
+                <div class="statusRow">
+                    <br />
+                    <div class="label label-important" *ngIf="errorMessage">
+                        <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</div>

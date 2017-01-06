@@ -1,0 +1,114 @@
+<!--
+    
+    TODO 1: Adding Directives to a <form> Control
+    
+    Perform the following steps to add Angular form functionality 
+    to the <form> tag:
+    
+    1. Bind the <form> tag's ngSubmit event to the "submit()" 
+       function in the component code using event binding.
+    
+    2. Add a local template variable to the <form> tag named "customerForm" 
+       that has a value of "ngForm".
+       
+       Hint: Use the # character to create the local variable. Refer to the
+       course manual or to the lab's end solutiosn if you need help. This is
+       the local template variable that the @ViewChild decorator property shown earlier
+       references dynamically.
+    
+-->
+<div>
+  <form class="customer-form" novalidate>
+
+    <!--
+        
+        TODO 2: Adding Directives and Local Variables to Input Controls
+        
+        Perform the following steps to add Angular template form functionality 
+        to the form's <input> controls:
+        
+        1. Locate the <input> for firstName below and note that is has the following:
+
+           a. A name attribute that matches the property name the input is bound to.
+           b. A "two-way"" binding created using the [(ngModel)] binding.
+           c. A #firstName local template variable assigned to NgModel.
+           
+        2. Following the example shown on the firstName <input> element, 
+           update the lastName, address and city <input> controls to have the following functionality:
+          
+          a. Add a name attribute that is assigned a value that matches with the
+             name of the property that ngModel binds to. For example, if
+             ngModel binds to customer.firstName then you would add: name="firstName"
+          
+          b. Add an ngModel "two-way" binding using [( )] syntax that binds to the appropriate customer 
+             object property for the target <input>.
+              
+          c. Add a local template variable (hint: use #varName). Assign the template variable 
+             a value of "ngModel".
+              
+        3. Bind each <div class="alert alert-danger"> tag's "hidden" property to the respective local 
+           variable name on the <input> that the error div is associated with. Follow the same pattern 
+           that is shown in the First Name section below.
+        
+    -->
+
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="customer.firstName" #firstName="ngModel" required>
+      <div class="alert alert-danger" [hidden]="firstName.pristine || firstName.valid">First Name is required</div>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" required>
+      <div class="alert alert-danger">Last Name is required</div>
+    </div>
+    <div class="form-group">
+      <label>Address</label>
+      <input type="text" class="form-control" required>
+      <div class="alert alert-danger">Address is required</div>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" class="form-control" required>
+      <div class="alert alert-danger">City is required</div>
+    </div>
+    <div class="form-group">
+      <label>State</label>
+      <select class="form-control" 
+              [(ngModel)]="customer.state.abbreviation"
+              name="state" 
+              required>
+          <option *ngFor="let state of states" [ngValue]="state.abbreviation">{{state.name}}</option>
+      </select>
+    </div>
+    <div *ngIf="customer">
+      <div class="alert alert-warning" *ngIf="customer.id && deleteMessageEnabled">
+         Delete Customer?&nbsp;&nbsp;<button class="btn btn-danger" (click)="delete($event)">Yes</button>&nbsp;&nbsp;
+         <button class="btn btn-default" (click)="deleteMessageEnabled = false">No</button>
+      </div>
+      <button class="btn btn-danger" *ngIf="customer.id && !deleteMessageEnabled" (click)="deleteMessageEnabled = true">Delete</button>&nbsp;&nbsp;
+
+      <!--
+          
+          TODO 3: Binding to Button Properties and Events
+          
+          1. Bind the first <button> tag below to the "click" event using Angular
+             event binding syntax. Assign it a value of:
+            
+             cancel($event)
+            
+          2. Bind the second <button> element to the "disabled" property using Angular 
+             property binding syntax. Assign it a value of:
+            
+             customerForm.pristine || !customerForm.valid
+            
+      -->
+      <div class="pull-right" *ngIf="!deleteMessageEnabled">
+        <button class="btn btn-default">Cancel</button>&nbsp;&nbsp;
+        <button type="submit" class="btn btn-success">{{ operationText }}</button>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage != null">{{ errorMessage }}</div>
+  </form>
+  <br />
+</div>
