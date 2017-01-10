@@ -19,8 +19,8 @@ import { PreloadModulesStrategy } from './core/strategies/preload-modules.strate
 
   TODO 2: Defining "customers" Routes
 
-  Add the following routes into the app_routes constant below. Ensure that you add them AFTER
-  the existing path: '' route.
+  Add the following routes into the app_routes constant below. Ensure that you add them 
+  AFTER the first path: '' route.
 
   { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
   { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
