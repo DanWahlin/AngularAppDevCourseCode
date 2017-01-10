@@ -19,7 +19,7 @@ import { AuthService } from '../core/services/auth.service';
 
 */
 @Injectable()
-export class CanActivateGuard implements CanActivate {
+export class CanActivateGuard {
 
 /*
 

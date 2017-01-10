@@ -24,13 +24,10 @@
   1. Add a constant (const) named routes that is of type Routes below the TODO comment. 
      It should be assigned an empty array value: []
 
-  2. Add the following inside of the array to define a nameless route that will
-     load the CustomersComponent
+  2. Add the following inside of the array to define a route that will load the CustomersComponent
 
-    { path: '', component: CustomersComponent }
+     { path: 'customers', component: CustomersComponent }
 
-    Why is the path empty in the above route definition? This will be made more clear as you
-    continue on to other exercises in this lab and learn about lazy loading of modules.
 
 */
 
