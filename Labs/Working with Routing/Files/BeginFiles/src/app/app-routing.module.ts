@@ -49,12 +49,12 @@ const app_routes: Routes = [
 
     RouterModule.forRoot(app_routes, { preloadingStrategy: PreloadAllModules })
 
-  If no preloadingStrategy is defined then feature modules will be loaded as they're needed in the background 
-  (as the user clicks a link to view orders for example). By giving a preloadStrategy of "PreloadAllModules"
-  the app will preload all modules in the background. 
+  If no preloadingStrategy is defined then feature modules will be loaded as they're needed 
+  in the background (as the user clicks a link to view orders for example). By giving a preloadStrategy 
+  of "PreloadAllModules" the app will preload all modules in the background. 
 
-  A custom strategy is also imported above that can be used in place of PreloadAllModules to selectively preload 
-  specific modules (this custom strategy currently isn't being used).
+  A custom strategy (PreloadModulesStrategy) is also imported above that can be used in place of 
+  PreloadAllModules to selectively preload specific modules (this custom strategy currently isn't being used).
 
 */
 @NgModule({
