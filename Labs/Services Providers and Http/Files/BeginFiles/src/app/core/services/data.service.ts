@@ -21,7 +21,7 @@ and catch are imported as well.
 
 All of the functionality provided by RxJS could be imported using:
 
-import 'rxjs/Rx';
+"import 'rxjs/Rx';"
 
 However, this can result in many unecessary objects being loaded which is why
 the individual symbols and operators are imported here. 

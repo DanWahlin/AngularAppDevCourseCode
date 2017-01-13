@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
   TODO 1: Import CanActivate
 
-  Import CanActivate from @angular/router
+  Add code to import CanActivate from the @angular/router module (note that 
+  @angular/router is already defined below).
 
 */
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';

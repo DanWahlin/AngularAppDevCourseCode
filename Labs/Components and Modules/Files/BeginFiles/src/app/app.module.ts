@@ -39,7 +39,7 @@ TODO 3: Declare and Bootstrap AppComponent
 
   2. AppComponent needs to be declared in this module so that its selector can be used.
      It also needs to be marked as the bootstrap (startup) component. To accomplish this add AppComponent
-     into the "declarations"" and "bootstrap"" properties below (inside of the existing array brackets)
+     into the "declarations" and "bootstrap"" properties below (inside of the existing array brackets)
 
 */
 

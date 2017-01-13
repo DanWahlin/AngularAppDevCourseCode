@@ -23,13 +23,8 @@ export class CustomerEditComponent implements OnInit {
      that it exposes such as firstName, lastName, address, etc.
 
   2. Locate the states property which has a type of IStates[]. You'll be adding
-     code that calls the server to retrieve a list of states (as in US states)
+     code that calls the server to retrieve a list of states (US states)
      later in the exercise. The states will be displayed in a <select> control.
-
-  3. Locate the customerForm property of type NgForm. Notice that is has a @ViewChild decorator in
-     front of it that is passed a value of "customerForm". This will be used to dynamically 
-     locate a customerForm local template variable that you'll be adding into the form. It'll be used
-     to track when the user has changed the form (made the form "dirty").
 
   */
 
@@ -50,17 +45,28 @@ export class CustomerEditComponent implements OnInit {
   errorMessage: string;
   deleteMessageEnabled: boolean;
   operationText: string = 'Insert';
+
+ /*
+
+   TODO 2: The customerForm property
+  
+   Locate the customerForm property of type NgForm. Notice that is has a @ViewChild decorator in
+   front of it that is passed a value of "customerForm". This will be used to dynamically 
+   locate a customerForm local template variable that you'll be adding into the form. The property
+   will be used to track when the user has changed the form (made the form "dirty").
+
+ */
   @ViewChild('customerForm') customerForm: NgForm;
 
   /*
 
-  TODO 2: Exploring Injected Parameters
+  TODO 3: Exploring Injected Parameters
      
-  1. Notice that Router, ActivatedRoute and DataService (in addition to other services)
-     are injected into the constructor and added as properties of the component.
+  Notice that Router, ActivatedRoute and DataService (in addition to other services)
+  are injected into the constructor and added as properties of the component.
 
-     The GrowlerService is used to display messages ("growl notifications" or "toasts") 
-     quickly to a user and the ModalService is used to display modal dialogs.
+  The GrowlerService is used to display messages ("growl notifications" or "toasts") 
+  to a user and the ModalService is used to display modal dialogs.
 
   */
   
@@ -72,7 +78,7 @@ export class CustomerEditComponent implements OnInit {
 
   /*
 
-  TODO 3: Retrieving a Customer Object to Bind to the Form
+  TODO 4: Retrieving a Customer Object to Bind to the Form
 
   1. Add the following code into the ngOnInit() function below:
      
@@ -137,7 +143,7 @@ export class CustomerEditComponent implements OnInit {
       } else {
         /*
 
-        TODO 4: Updating a Customer Object
+        TODO 5: Updating a Customer Object
        
         1. Add the following code into immediately below the TODO comment to pass
           the customer object to DataService's updateCustomer() function.
@@ -156,8 +162,8 @@ export class CustomerEditComponent implements OnInit {
           },
           (err: any) => console.log(err));
 
-        2. Within the "if (status) { }"" code you added in the previous task, add the following code to 
-           mark the form as pristine use a growler service (a message display service) to display
+        2. Within the "if (status) { }" code you added in the previous task, add the following code to 
+           mark the form as pristine and use a growler service (a message display service) to display
            a message to the user:
 
             //Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
@@ -179,7 +185,7 @@ export class CustomerEditComponent implements OnInit {
 
   /*
 
-  TODO 5: Navigating to the Root Route
+  TODO 6: Navigating to the Root Route
 
   Add code into the cancel() function below to navigate to the "/customers"
   route using the router object's navigate() function. "router" is injected into
@@ -215,7 +221,7 @@ export class CustomerEditComponent implements OnInit {
 
   /*
 
-  TODO 6: Determining if the User Can Leave the Form
+  TODO 7: Determining if the User Can Leave the Form
   
   1. Open ./can-deactivate.guard.ts and note that it calls into the CustomerEditComponent's
      canDeactivate() function (defined below) to determine if it's OK to leave the view. If the

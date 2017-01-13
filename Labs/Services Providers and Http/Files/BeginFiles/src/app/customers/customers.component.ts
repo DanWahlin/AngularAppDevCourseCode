@@ -87,10 +87,6 @@ export class CustomersComponent implements OnInit {
       
          (err: any) => console.log(err),
          () => console.log('getCustomersPage() retrieved customers for page: ' + page));
-      
-         
-      Note: If you need help with this step refer to the course manual or 
-            to the lab's End folder for details on getting to the source code.
 
     */
 

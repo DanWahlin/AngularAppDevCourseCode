@@ -101,12 +101,16 @@ a type of FormBuilder and mark it as private.
        a boolean property named "valid" that can be used to determine if the form is valid or not. The userLogin 
        object will contain the email and password values that are part of the form group created earlier.
 
+       Add the following parameters into the submit() function parenthesis:
+
+       { userLogin, valid }: { userLogin: IUserLogin, valid: boolean }
+
     2. A call to authService.login() is made and the userLogin object is passed to it. This calls into the
        data service which then calls the server and determines if the user credentials are valid or not.
 
     */
 
-    submit({ userLogin, valid }: { userLogin: IUserLogin, valid: boolean }) {
+    submit() {
         this.authService.login(userLogin)
             .subscribe((status: boolean) => {
                 if (status) {

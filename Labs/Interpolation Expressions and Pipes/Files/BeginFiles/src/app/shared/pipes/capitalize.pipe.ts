@@ -29,7 +29,6 @@ Perform the following steps:
    that can be used inside of templates:
 	 
    { name: 'capitalize' }
-	 
 
 */
 

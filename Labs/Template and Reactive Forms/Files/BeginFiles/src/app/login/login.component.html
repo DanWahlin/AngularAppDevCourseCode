@@ -12,7 +12,9 @@
             to the <form> tag:
             
             1. Bind the <form> tag's ngSubmit event to the "submit()" function in the component 
-               code using event binding.
+               code using event binding and pass "loginForm" into the submit() function call:
+
+               (ngSubmit)="submit(loginForm)"
             
             2. Add the following reactive forms directive to the form. This directive will bind to a 
                property named loginForm that is defined in the component class (it's the FormGroup):
@@ -32,13 +34,18 @@
                         
                         TODO 2: Exploring Reactive Form Controls
 
-                        Note that the following email <input> binds to the associated FormGroup control by using the
-                        formControlName directive. You can access the status of the control (touched/untouched, valid/invalid, etc.)
-                        through the FormGroup name, loginForm.controls.email.touched for example, as shown below. 
+                        1. Bind the email <input> below to the appropriate FormGroup control by using the
+                           formControlName directive:
+
+                            formControlName="email"
+                        
+                        2. You can access the status of the control (touched/untouched, valid/invalid, etc.)
+                           through the FormGroup name, loginForm.controls.email.touched for example, as shown 
+                           on the <div> that is below the email <input>. 
 
                     --> 
 
-                        <input type="email" name="email" class="form-control" formControlName="email" required />
+                        <input type="email" name="email" class="form-control" required />
                         <div class="alert alert-danger" [hidden]="loginForm.controls.email.untouched || loginForm.controls.email.valid">
                             A valid email address is required
                         </div>

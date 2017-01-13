@@ -1,33 +1,39 @@
 import { Component } from '@angular/core';
 
+/*
+
+TODO 1: Exploring the Code and Importing a Symbol
+
+1. Take a moment to look through the existing code in the file.
+
+2. Import OnInit from the @angular/core module. 
+   Hint: The module is already defined above so you can use it for this task.
+
+*/
+
 import { DataService } from '../core/services/data.service';
 import { ICustomer, IPagedResults } from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 
 /*
 
-TODO 1: Modifying the CustomersComponent Class
-
-1. Take a moment to look through the existing code in the file.
-
-2. Import OnInit from the @angular/core module. 
-   Hint: The module is already defined above so you can use it for this task.
+TODO 2: Modifying the CustomersComponent Class
    
-3. Take a moment to examine the @Component decorator properties:
+1. Take a moment to examine the @Component decorator properties:
    a. The moduleId is set to module.id so that Angular knows the 
       relative path for the component (it simplifies the template path).
    b. The selector is set to 'cm-customers'.
 
-4. Add a templateUrl property into the @Component decorator with the following value:
+2. Add a templateUrl property into the @Component decorator with the following value:
   
    customers.component.html
    
-5. Implement the OnInit interface on the CustomersComponent class below.
+3. Implement the OnInit abstract class on the CustomersComponent class below.
    This requires performing the following steps:
-   a. Use the implements keyword on the class definition to implement the interface.
+   a. Use the "implements" keyword on the class definition to implement the interface.
    b. Add the ngOnInit() function into the class
 
-6. Add the following code into the ngOnInit() function to initialize property values
+4. Add the following code into the ngOnInit() function to initialize property values
    and retrieve data (more on retrieving data later in the course - we need this
    code for now to get the app working):
 

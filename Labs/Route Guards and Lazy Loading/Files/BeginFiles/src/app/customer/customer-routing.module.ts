@@ -12,13 +12,13 @@ import { CanDeactivateGuard } from './can-deactivate.guard';
 
   TODO 1: Modifying a Route to Support Lazy Loading
 
-  1. Change the existing route path from 'customers/:id' to '' since the feature
+  1. Change the existing route path from path: 'customers/:id' to path: '' since the feature
      module will be lazy loaded by the application and the route path will be defined 
      in the root routing module.
 
   2. Add CanActivateGuard and CanDeactivateGuard to the 'edit' child route below.
 
-     Hint: Each route guard property requires an array for the value even if a single value is passed.
+     IMPORTANT: Each route guard property requires an array for the value even if a single value is passed.
 
 */
 
