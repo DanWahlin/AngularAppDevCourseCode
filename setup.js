@@ -97,6 +97,10 @@ downloadAndExtractProjects(function(err) {
     overlayFiles('./Labs/Working with Routing');
 
     //Lab 9
+    copyFolder('./Angular-JumpStart-master', './Labs/Route Guards and Lazy Loading/Begin');
+    overlayFiles('./Labs/Route Guards and Lazy Loading');
+
+    //Lab 10
     copyFolder('./Angular-JumpStart-master', './Labs/Template and Reactive Forms/Begin');
     overlayFiles('./Labs/Template and Reactive Forms');
 
