@@ -5,7 +5,8 @@ packages
 *.mdf
 *.ldf
 node_modules
-
-
+npm-debug.log
+.idea
+.vs
 
 

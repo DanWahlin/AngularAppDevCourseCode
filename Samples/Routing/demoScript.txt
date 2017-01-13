@@ -1,0 +1,25 @@
+Demo 1
+1. Add <router-outlet> into app.component.ts
+2. Add customers.routing.ts
+3. Add customersRouting.routes and customersRouting.components into customers.module.ts
+4. Add the following into customers-list.component.html
+
+<a [routerLink]="['/orders', cust.id ]">
+    {{ cust.name | capitalize }}
+</a>
+
+5. Add the following into customer-orders.component.html
+
+<a routerLink="/customers">View All Customers</a>
+
+
+
+Demo 3: Route Parameters
+
+3. Add the following into the customer-orders.component.ts constructor:
+
+private route: ActivatedRoute
+
+4. Grab the route parameter in ngOnInit() in customer-orders.component.ts
+
++this.route.snapshot.params['id'];

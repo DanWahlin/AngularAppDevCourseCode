@@ -1,9 +1,0 @@
-Demo Steps:
-
-1. Create a customers-list folder in src/app
-2. Add a customers-list.component.ts file into src/app/customers-list. Name the class CustomersListComponent.
-3. Add a customers-list.component.html file into src/app/customers-list and set it as the templateUrl for the component.
-4. Add HTML content into the template (a header and an unordered list of customer first name for example).
-3. Import CustomersListComponent into app.module.ts and define in declarables
-4. Add the <customers-list> tag into the app.component.ts template
-5. Run the app and the customers-list component should render.
