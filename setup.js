@@ -51,11 +51,11 @@ function downloadAndExtractProjects(callback) {
 
 //Start process
 downloadAndExtractProjects(function(err) {
-    var sampleFolders = ['./Samples/Introduction-To-Angular',
-                         './Samples/Components-And-Modules', 
-                         './Samples/Template-Expressions-And-Pipes',
-                         './Samples/Component-Properties-And-Data-Binding',
-                         './Samples/Services-Providers-And-Http'];
+    // var sampleFolders = ['./Samples/Introduction-To-Angular',
+    //                      './Samples/Components-And-Modules', 
+    //                      './Samples/Template-Expressions-And-Pipes',
+    //                      './Samples/Component-Properties-And-Data-Binding',
+    //                      './Samples/Services-Providers-And-Http'];
 
     // sampleFolders.forEach(function(sampleFolder) {
     //     copyFolder('./Angular-HelloWorld-master', sampleFolder + '/Begin');
