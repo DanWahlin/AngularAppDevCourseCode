@@ -103,7 +103,7 @@ a type of FormBuilder and mark it as private.
 
        Add the following parameters into the submit() function parenthesis:
 
-       { userLogin, valid }: { userLogin: IUserLogin, valid: boolean }
+       { value, valid }: { value: IUserLogin, valid: boolean }
 
     2. A call to authService.login() is made and the userLogin object is passed to it. This calls into the
        data service which then calls the server and determines if the user credentials are valid or not.
@@ -111,7 +111,7 @@ a type of FormBuilder and mark it as private.
     */
 
     submit() {
-        this.authService.login(userLogin)
+        this.authService.login(value)
             .subscribe((status: boolean) => {
                 if (status) {
                     this.growler.growl('Logged in', GrowlerMessageType.Info);
