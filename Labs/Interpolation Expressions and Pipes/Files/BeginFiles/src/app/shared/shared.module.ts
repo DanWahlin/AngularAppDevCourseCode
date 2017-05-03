@@ -18,7 +18,7 @@ import { PaginationModule } from './pagination/pagination.module';
 
 /*
 
-TODO 2: Import CapitalizePipe and TripPipe
+TODO 2: Import CapitalizePipe and TrimPipe
 
 Import CapitalizePipe and TrimPipe below the TODO task.
 
