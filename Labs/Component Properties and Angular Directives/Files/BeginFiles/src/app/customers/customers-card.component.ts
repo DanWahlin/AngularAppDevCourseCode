@@ -9,10 +9,7 @@ TODO 1: Add an Input Property to the Class
 
 1. Import the Input decorator from the @angular/core module (you can add it above).
 
-2. Open customers-card.component.html in the editor and take a moment to look at the HTML.
-   This file is responsible for rendering the cards that you see on the "homepage" of the app.
-
-3. Add an input property (ensure that you add the @Input() decorator in front of the property name)
+2. Add an input property (ensure that you add the @Input() decorator in front of the property name)
    into the CustomersCardComponent class below using the following information:
    
     Property Name:          customers
@@ -21,6 +18,8 @@ TODO 1: Add an Input Property to the Class
 
    This property will be used to pass customer objects into this component (more on this later).
 
+ 3. Note that trackByService is injected. This will be used
+    with the *ngFor directive later in the lab.
 */
 
 @Component({ 
