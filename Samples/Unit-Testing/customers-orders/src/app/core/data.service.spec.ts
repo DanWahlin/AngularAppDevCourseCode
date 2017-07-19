@@ -11,7 +11,7 @@ import { ICustomer } from '../shared/interfaces';
 describe('DataService Tests', () => {
   let mockBackend: MockBackend;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         DataService,
@@ -31,7 +31,7 @@ describe('DataService Tests', () => {
 
     mockBackend = getTestBed().get(MockBackend);
 
-  }));
+  });
 
   it('should be created', inject([DataService], (service: DataService) => {
     expect(service).toBeTruthy();

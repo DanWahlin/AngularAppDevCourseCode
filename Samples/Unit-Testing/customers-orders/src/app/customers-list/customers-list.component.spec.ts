@@ -15,7 +15,7 @@ import { SorterService } from '../core/sorter.service';
 describe('CustomersList Component...', () => {
     let mockBackend: MockBackend;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 CustomersListComponent,
@@ -41,7 +41,7 @@ describe('CustomersList Component...', () => {
 
         TestBed.compileComponents();
 
-    }));
+    });
 
   function mockBackendFunctions(testBed: TestBed) {
     mockBackend = testBed.get(MockBackend);
