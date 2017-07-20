@@ -32,11 +32,21 @@ describe('DataService Tests', () => {
 
   });
 
+function provideCustomersToMockBackend() {
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+      connection.mockRespond(new Response(
+        new ResponseOptions({
+          body: customers
+        })
+      ));
+    });
+}
+
   it('should be created', inject([DataService], (service: DataService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('getCustomers() should use HTTP call to get customers',
+  it('should use HTTP call in getCustomers()',
     inject([DataService, MockBackend], fakeAsync((service: DataService, backend: MockBackend) => {
 
       backend.connections.subscribe((connection: MockConnection) => {
@@ -47,7 +57,7 @@ describe('DataService Tests', () => {
       service.getCustomers();
     })));
 
-  it('getOrders() should use HTTP call to get orders',
+  it('should use HTTP call in getOrders()',
     inject([DataService, MockBackend], fakeAsync((service: DataService, backend: MockBackend) => {
 
       backend.connections.subscribe((connection: MockConnection) => {
@@ -60,33 +70,7 @@ describe('DataService Tests', () => {
 
   it('should get customers async',
     async(inject([DataService], (service) => {
-      mockBackend.connections.subscribe(
-        (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              body: customers
-            })
-          ));
-        });
-
-      service.getCustomers().subscribe(
-        (data) => {
-          expect(data.length).toBe(4);
-          expect(data[0].id).toBe(1);
-          expect(data[0].name).toBe('Ted James');
-        });
-    })));
-
-  it('should get customers async',
-    async(inject([DataService], (service) => {
-      mockBackend.connections.subscribe(
-        (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              body: customers
-            })
-          ));
-        });
+      provideCustomersToMockBackend();
 
       service.getCustomers().subscribe(
         (data) => {
@@ -98,14 +82,7 @@ describe('DataService Tests', () => {
 
   it('should get a single customer async',
     async(inject([DataService], (service) => {
-      mockBackend.connections.subscribe(
-        (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              body: customers
-            })
-          ));
-        });
+      provideCustomersToMockBackend();
 
       service.getCustomer(3).subscribe(
         (data) => {
@@ -127,8 +104,7 @@ describe('DataService Tests', () => {
         "city": "Phoenix"
       };
 
-      service.insertCustomer(customer).subscribe(
-        (result) => {
+      service.insertCustomer(customer).subscribe((result) => {
           expect(result).toBeDefined();
           expect(result.status).toBe(201);
         });
