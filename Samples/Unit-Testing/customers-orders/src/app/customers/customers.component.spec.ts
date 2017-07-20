@@ -1,6 +1,8 @@
 import { TestBed, ComponentFixture, getTestBed, async } from '@angular/core/testing';
-import { HttpModule, ResponseOptions, Response, RequestMethod, Http,
-         BaseRequestOptions, XHRBackend } from '@angular/http';
+import {
+  HttpModule, ResponseOptions, Response, RequestMethod, Http,
+  BaseRequestOptions, XHRBackend
+} from '@angular/http';
 import { LocationStrategy } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
@@ -14,55 +16,55 @@ import { CapitalizePipe } from '../shared/capitalize.pipe';
 import { SorterService } from '../core/sorter.service';
 
 describe('Customers Component...', () => {
-    let mockBackend: MockBackend;
-    let fixture: ComponentFixture<CustomersComponent>;
+  let mockBackend: MockBackend;
+  let fixture: ComponentFixture<CustomersComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                CustomersComponent,
-                CustomersListComponent,
-                FilterTextboxComponent,
-                CapitalizePipe
-            ],
-            providers: [
-                DataService,
-                SorterService,
-                MockBackend,
-                BaseRequestOptions,
-                {
-                    provide: Http,
-                    deps: [MockBackend, BaseRequestOptions],
-                    useFactory:
-                        (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-                            return new Http(backend, defaultOptions);
-                        }
-                }
-            ],
-            imports: [ HttpModule, FormsModule, RouterTestingModule ]
-        });
-
-        mockBackendFunctions();
-        fixture = TestBed.createComponent(CustomersComponent);
-        TestBed.compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        CustomersComponent,
+        CustomersListComponent,
+        FilterTextboxComponent,
+        CapitalizePipe
+      ],
+      providers: [
+        DataService,
+        SorterService,
+        MockBackend,
+        BaseRequestOptions,
+        {
+          provide: Http,
+          deps: [MockBackend, BaseRequestOptions],
+          useFactory:
+          (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
+          }
+        }
+      ],
+      imports: [HttpModule, FormsModule, RouterTestingModule]
     });
+
+    mockBackendFunctions();
+    fixture = TestBed.createComponent(CustomersComponent);
+    TestBed.compileComponents();
+  });
 
   function mockBackendFunctions() {
     mockBackend = TestBed.get(MockBackend);
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              body: customers
-            })
-          ));
-        });
+        connection.mockRespond(new Response(
+          new ResponseOptions({
+            body: customers
+          })
+        ));
+      });
   }
 
   it('people is filled by default', () => {
-      fixture.detectChanges();
+    fixture.detectChanges();
 
-      expect(fixture.componentInstance.people).toBe(customers);
+    expect(fixture.componentInstance.people).toBe(customers);
   });
 
 });
