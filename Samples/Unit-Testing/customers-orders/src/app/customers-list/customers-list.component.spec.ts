@@ -33,8 +33,7 @@ describe('CustomersList Component...', () => {
                 {
                     provide: Http,
                     deps: [MockBackend, BaseRequestOptions],
-                    useFactory:
-                    (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+                    useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
                         return new Http(backend, defaultOptions);
                     }
                 }

@@ -35,8 +35,7 @@ describe('Customers Component...', () => {
         {
           provide: Http,
           deps: [MockBackend, BaseRequestOptions],
-          useFactory:
-          (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           }
         }
@@ -60,6 +59,12 @@ describe('Customers Component...', () => {
         ));
       });
   }
+
+  it('creates a CustomersComponent instance', () => {
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance).toBeTruthy();
+  });
 
   it('people is filled by default', () => {
     fixture.detectChanges();
