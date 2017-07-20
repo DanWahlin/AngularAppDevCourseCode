@@ -15,6 +15,7 @@ import { SorterService } from '../core/sorter.service';
 
 describe('Customers Component...', () => {
     let mockBackend: MockBackend;
+    let fixture: ComponentFixture<CustomersComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -41,11 +42,13 @@ describe('Customers Component...', () => {
             imports: [ HttpModule, FormsModule, RouterTestingModule ]
         });
 
+        mockBackendFunctions();
+        fixture = TestBed.createComponent(CustomersComponent);
         TestBed.compileComponents();
     });
 
-  function mockBackendFunctions(testBed: TestBed) {
-    mockBackend = testBed.get(MockBackend);
+  function mockBackendFunctions() {
+    mockBackend = TestBed.get(MockBackend);
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
           connection.mockRespond(new Response(
@@ -57,11 +60,6 @@ describe('Customers Component...', () => {
   }
 
   it('people is filled by default', () => {
-      let testBed = getTestBed();
-      mockBackendFunctions(testBed);
-
-      let fixture = getTestBed().createComponent(CustomersComponent);
-
       fixture.detectChanges();
 
       expect(fixture.componentInstance.people).toBe(customers);

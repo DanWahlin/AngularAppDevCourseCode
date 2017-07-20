@@ -29,7 +29,7 @@ describe('DataService Tests', () => {
       imports: [ HttpModule ]
     });
 
-    mockBackend = getTestBed().get(MockBackend);
+    mockBackend = TestBed.get(MockBackend);
 
   });
 
@@ -135,15 +135,23 @@ describe('DataService Tests', () => {
         });
     })));
 
-  //Example of using a Jasmine spy
-  it('spy should monitor CustomersService.getCustomer',
+  //Examples of using a spy
+  it('spy should monitor CustomersService.getCustomer to check parameter',
         async(inject([DataService], (service) => {
+          let customerId = 1;
+          service.getCustomer = jasmine.createSpy('getCustomer');
+          service.getCustomer(customerId);
 
-          service.getCustomer = jasmine.createSpy('getCustomer').and.returnValue(customers[0]);
+          expect(service.getCustomer).toHaveBeenCalledWith(customerId);
+  })));
 
+  it('spy should monitor CustomersService.getCustomer and check return value',
+        async(inject([DataService], (service) => {
+          let customer = customers[0];
+          service.getCustomer = jasmine.createSpy('getCustomer').and.returnValue(customer);
           service.getCustomer(1);
-
-          expect(service.getCustomer).toHaveBeenCalledWith(1);
+          
+          expect(service.getCustomer.calls.mostRecent().returnValue).toBe(customer);
   })));
 
 });

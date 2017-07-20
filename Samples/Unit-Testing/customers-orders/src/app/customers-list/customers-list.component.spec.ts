@@ -14,6 +14,7 @@ import { SorterService } from '../core/sorter.service';
 
 describe('CustomersList Component...', () => {
     let mockBackend: MockBackend;
+    let fixture: ComponentFixture<CustomersListComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -39,12 +40,15 @@ describe('CustomersList Component...', () => {
             imports: [ HttpModule, FormsModule, RouterTestingModule ]
         });
 
+        let testBed = getTestBed();
+        fixture = TestBed.createComponent(CustomersListComponent);
+
         TestBed.compileComponents();
 
     });
 
-  function mockBackendFunctions(testBed: TestBed) {
-    mockBackend = testBed.get(MockBackend);
+  function mockBackendFunctions() {
+    mockBackend = TestBed.get(MockBackend);
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
           connection.mockRespond(new Response(
@@ -55,21 +59,13 @@ describe('CustomersList Component...', () => {
         });
   }
 
-  function createComponent() {
-      let testBed = getTestBed();
-      mockBackendFunctions(testBed);
-      return getTestBed().createComponent(CustomersListComponent);
-  }
-
   it('customers is empty array by default', () => {
-      let fixture = createComponent();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.filteredCustomers).toEqual([]);
   });
 
   it('filteredCustomers input property has a value', () => {
-      let fixture = createComponent();
       fixture.componentInstance.filteredCustomers = customers;
       fixture.detectChanges();
 
@@ -77,7 +73,6 @@ describe('CustomersList Component...', () => {
   });
 
   it('should render 4 customer rows', () => {
-      let fixture = createComponent();
       fixture.componentInstance.filteredCustomers = customers;
       fixture.detectChanges();
 
@@ -86,7 +81,6 @@ describe('CustomersList Component...', () => {
   });
 
   it('should have first data row with value of Ted James', () => {
-      let fixture = createComponent();
       fixture.componentInstance.filteredCustomers = customers;
 
       fixture.detectChanges();
