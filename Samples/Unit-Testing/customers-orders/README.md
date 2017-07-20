@@ -18,7 +18,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). Want to debug them in VS Code? Follow the
 steps in this [recipe](https://github.com/weinand/vscode-recipes/tree/master/Angular-CLI). Note that the receipe steps currently
-don't work with @angular/cli > 1.1.1
+don't work with @angular/cli > 1.1.1.
 
 ## Further help
 
