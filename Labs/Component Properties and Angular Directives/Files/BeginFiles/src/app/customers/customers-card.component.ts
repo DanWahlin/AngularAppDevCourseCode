@@ -38,7 +38,7 @@ export class CustomersCardComponent implements OnInit {
 
 
   
-  constructor(private trackbyService: TrackByService) { }
+  constructor(public trackbyService: TrackByService) { }
   
   ngOnInit() {
 
