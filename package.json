@@ -7,7 +7,7 @@
     "setup": "node setup.js"
   },
   "dependencies": {
-    "fs-extra": "^3.0.1",
+    "fs-extra": "^4.0.1",
     "request": "^2.81.0",
     "adm-zip": "^0.4.7"
   }
