@@ -4,9 +4,8 @@ import { ICustomer } from '../shared/interfaces';
 import { SorterService } from '../core/sorter.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'co-customers-list',
-    templateUrl: 'customers-list.component.html'
+    templateUrl: './customers-list.component.html'
 })
 export class CustomersListComponent implements OnInit {
     private _customers: ICustomer[] = [];

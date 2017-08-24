@@ -4,9 +4,8 @@ import { ICustomer } from '../shared/interfaces';
 import { DataService } from '../core/data.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'co-customers',
-    templateUrl: 'customers.component.html'
+    templateUrl: './customers.component.html'
 })
 export class CustomersComponent implements OnInit {
 

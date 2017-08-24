@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ICustomer } from '../shared/interfaces';
 
 @Component({
-    moduleId: module.id,
     selector: 'customers-list',
-    templateUrl: 'customers-list.component.html'
+    templateUrl: './customers-list.component.html'
 })
 export class CustomersListComponent implements OnInit {
 

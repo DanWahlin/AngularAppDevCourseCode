@@ -23,10 +23,9 @@ TODO 1: Add an Input Property to the Class
 */
 
 @Component({ 
-  moduleId: module.id,
   selector: 'cm-customers-card', 
-  templateUrl: 'customers-card.component.html',
-  styleUrls: [ 'customers-card.component.css' ],
+  templateUrl: './customers-card.component.html',
+  styleUrls: [ './customers-card.component.css' ],
   //When using OnPush detectors, then the framework will check an OnPush 
   //component when any of its input properties changes, when it fires 
   //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)

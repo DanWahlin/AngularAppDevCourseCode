@@ -19,14 +19,11 @@ import { FilterService } from '../core/services/filter.service';
 
 TODO 2: Modifying the CustomersComponent Class
    
-1. Take a moment to examine the @Component decorator properties:
-   a. The moduleId is set to module.id so that Angular knows the 
-      relative path for the component (it simplifies the template path).
-   b. The selector is set to 'cm-customers'.
+1. Take a moment to examine the @Component decorator. 
 
 2. Add a templateUrl property into the @Component decorator with the following value:
   
-   customers.component.html
+   ./customers.component.html
    
 3. Implement the OnInit abstract class on the CustomersComponent class below.
    This requires performing the following steps:
@@ -46,7 +43,6 @@ TODO 2: Modifying the CustomersComponent Class
 */
 
 @Component({ 
-  moduleId: module.id,
   selector: 'cm-customers'
 })
 export class CustomersComponent  {

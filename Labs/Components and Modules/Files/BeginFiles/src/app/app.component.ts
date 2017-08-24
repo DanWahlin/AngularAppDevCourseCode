@@ -18,9 +18,8 @@ TODO 2: Adding a Component Decorator
 
 2. Add the following properties into the decorator:
         
-moduleId:    module.id
 selector:    'cm-app-component'
-templateUrl: 'app.component.html'
+templateUrl: './app.component.html'
 
 */
 
