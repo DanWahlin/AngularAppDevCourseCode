@@ -184,7 +184,7 @@ export class DataService {
         return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
                    .map(res => res.status)           
                    .catch(this.handleError);  
-    }
+    } 
 
     deleteCustomer(id: number) : Observable<boolean> {
         return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
@@ -197,16 +197,13 @@ export class DataService {
                    .catch(this.handleError); 
     }
     
-    handleError(error: any) {
+    private handleError(error: HttpErrorResponse) {
         console.error('server error:', error); 
-        if (error instanceof Response) {
-          let errMessage = '';
-          try {
-            errMessage = error.json().error;
-          } catch(err) {
-            errMessage = error.statusText;
-          }
+        if (error.error instanceof Error) {
+          let errMessage = error.error.message;
           return Observable.throw(errMessage);
+          // Use the following instead if using lite-server
+          //return Observable.throw(err.text() || 'backend server error');
         }
         return Observable.throw(error || 'Node.js server error');
     }
