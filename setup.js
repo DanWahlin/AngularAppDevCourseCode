@@ -89,8 +89,8 @@ downloadAndExtractProjects(function(err) {
     overlayFiles('./Labs/Component Properties and Angular Directives');
 
     //Lab 7
-    copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and Http/Begin');
-    overlayFiles('./Labs/Services Providers and Http');
+    copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and HttpClient/Begin');
+    overlayFiles('./Labs/Services Providers and HttpClient');
 
     //Lab 8
     copyFolder('./Angular-JumpStart-master', './Labs/Working with Routing/Begin');
