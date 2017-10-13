@@ -2,10 +2,10 @@
 
 TODO 1: Importing Symbols from Angular Modules
 
-Import the following objects from the respective modules:
+Import the following symbols from the respective modules:
         
-Injectable      @angular/core
-Http, Response  @angular/http 
+Injectable                      @angular/core
+HttpClient, HttpErrorResponse   @angular/common/http 
 
 */
 
@@ -35,7 +35,7 @@ import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/map'; 
 import 'rxjs/add/operator/catch';
 
-import { ICustomer, IOrder, IState, IPagedResults } from '../../shared/interfaces';
+import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
 
 /*
 
@@ -55,9 +55,9 @@ export class DataService {
 
     /*
 
-    TODO 4: Inject Http
+    TODO 4: Inject HttpClient
 
-    Inject the Http object into the constructor. Give the injected parameter 
+    Inject the HttpClient object into the constructor. Give the injected parameter 
     a name of "http" and make it private so that a property is automatically created.
 
     */
@@ -66,19 +66,22 @@ export class DataService {
 
     /*
 
-    TODO 5: Use the Http Object to Retrieve a Page of Customers
+    TODO 5: Use the HttpClient Object to Retrieve a Page of Customers
 
     Perform the following tasks in the getCustomersPage() function below.
 
-    1. Make a call to http.get() and pass the following template string to it:
+    1. Make a call to http.get<ICustomer[]>() as shown below:
 
-        `${this.customersBaseUrl}/page/${page}/${pageSize}`
+        this.http.get<ICustomer[]>(`${this.customersBaseUrl}/page/${page}/${pageSize}`, {observe: 'response'})
 
-    2. Add the "return" keyword in front of the http.get() call to return the observable to the caller.
+        The { observe: response } value will allow us to get full access to the response
+        object including headers (which we'll need due to paging).
+
+    2. Add the "return" keyword in front of the this.http.get<ICustomer[]>() call to return the observable to the caller.
 
     3. Add a map() function call after the http.get() call (chain it) that looks like the following:
 
-        .map((res: Response) => {
+        .map(res => {
 
         })
 
@@ -92,7 +95,7 @@ export class DataService {
         const totalRecords = +res.headers.get('X-InlineCount');
 
         //Access returned customer data
-        let customers = res.json();
+        let customers = res.body as ICustomer[];
 
         //Add up the order total for each customer
         this.calculateCustomersOrderTotal(customers);
@@ -118,20 +121,20 @@ export class DataService {
 
     /*
 
-    TODO 6: Use the Http Object to Retrieve a Single Customer
+    TODO 6: Use the HttpClient Object to Retrieve a Single Customer
 
     This TODO will be quite similar to what you did in the previous one. In this TODO
-    you'll add code to retrieve a single customer from the server using the Http client.
+    you'll add code to retrieve a single customer from the server using the HttpClient.
 
-    1. Make a call to http.get() and pass the following template string to it:
+    1. Make a call to http.get<ICustomer>() and pass the following template string to it:
 
         this.customersBaseUrl + '/' + id
 
-    2. Add the "return" keyword in front of the http.get() call to return the observable to the caller.
+    2. Add the "return" keyword in front of the http.get<ICustomer>() call to return the observable to the caller.
 
     3. Add a map() function call after the http.get() call (chain it) that looks like the following:
 
-        .map((res: Response) => {
+        .map(customer => {
 
         })
 
@@ -141,7 +144,6 @@ export class DataService {
 
     5. Add the following code into the map() function body:
 
-        let customer = res.json();
         this.calculateCustomersOrderTotal([customer]);
         return customer;
 
@@ -155,9 +157,8 @@ export class DataService {
     }
 
     getCustomers() : Observable<ICustomer[]> {
-        return this.http.get(this.customersBaseUrl)
-                    .map((res: Response) => {
-                        let customers = res.json();
+        return this.http.get<ICustomer[]>(this.customersBaseUrl)
+                    .map(customers => {
                         this.calculateCustomersOrderTotal(customers);
                         return customers;
                     })
@@ -166,35 +167,33 @@ export class DataService {
 
     /*
 
-    TODO 7: Use the Http Object to Insert/Update/Delete Data
+    TODO 7: Use the HttpClient Object to Insert/Update/Delete Data
 
     Take a moment to look at the insert, update and delete functions below.
-    Notice how they use the Http object's post(), put() and delete() functions
+    Notice how they use the HttpClient object's post(), put() and delete() functions
     respectively to send data to the server.
 
     */
 
     insertCustomer(customer: ICustomer) : Observable<ICustomer> {
-        return this.http.post(this.customersBaseUrl, customer)
-                   .map((res: Response) => res.json())
+        return this.http.post<ICustomer>(this.customersBaseUrl, customer)
                    .catch(this.handleError);
     }
     
     updateCustomer(customer: ICustomer) : Observable<boolean> {
-        return this.http.put(this.customersBaseUrl + '/' + customer.id, customer)
-                   .map((res: Response) => res.json())
+        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
+                   .map(res => res.status)           
                    .catch(this.handleError);  
     }
 
     deleteCustomer(id: number) : Observable<boolean> {
-        return this.http.delete(this.customersBaseUrl + '/' + id)
-                   .map((res: Response) => res.json().status)
+        return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
+                   .map(res => res.status)
                    .catch(this.handleError);
     }
     
     getStates(): Observable<IState[]> {
-        return this.http.get('/api/states')
-                   .map((res: Response) => res.json())
+        return this.http.get<IState[]>('/api/states')
                    .catch(this.handleError); 
     }
     

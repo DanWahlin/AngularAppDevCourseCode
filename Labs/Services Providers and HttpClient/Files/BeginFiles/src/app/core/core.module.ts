@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 /*
 
-TODO 1: Importing HttpModule
+TODO 1: Importing HttpClientModule
 
-Import HttpModule from @angular/http
+Import HttpClientModule from @angular/common/http
 
 */
 
@@ -34,9 +34,9 @@ import { AuthService } from'./services/auth.service';
 
 /*
 
-TODO 3: Adding HttpModule and DataService into CoreModule
+TODO 3: Adding HttpClientModule and DataService into CoreModule
 
-1. Add HttpModule into the NgModule decorator's imports and exports property values.
+1. Add HttpClientModule into the NgModule decorator's imports and exports property values.
    This will allow it to be used in this module and by any other modules that import CoreModule.
 
 2. Add DataService into the NgModule decorator's providers property values so that it can be injected
