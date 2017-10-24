@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
 /*
 
 TODO 1: Importing HttpClientModule
@@ -9,8 +10,7 @@ Import HttpClientModule from @angular/common/http
 
 */
 
-import { GrowlerModule } from './growler/growler.module';
-import { ModalModule } from './modal/modal.module';
+
 
 /*
 
@@ -18,11 +18,15 @@ TODO 2: Importing DataService
 
 Import DataService from ./services/data.service
 
-Note that several other services are already imported such as FilterService,
+Note that several other services are already imported below such as FilterService,
 SorterService, AuthService, TrackByService and more.
 
 */
 
+
+import { GrowlerModule } from './growler/growler.module';
+import { ModalModule } from './modal/modal.module';
+import { OverlayModule } from './overlay/overlay.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterService } from './services/filter.service';
 import { SorterService } from './services/sorter.service';
@@ -31,6 +35,7 @@ import { DialogService } from './services/dialog.service';
 import { EnsureModuleLoadedOnceGuard } from './ensureModuleLoadedOnceGuard';
 import { ValidationService } from './services/validation.service';
 import { AuthService } from'./services/auth.service';
+import { EventBusService } from './services/event-bus.service';
 
 /*
 
@@ -45,11 +50,12 @@ TODO 3: Adding HttpClientModule and DataService into CoreModule
 */
 
 @NgModule({
-  imports: [ CommonModule, RouterModule, GrowlerModule, ModalModule ],
-  exports: [ GrowlerModule, RouterModule, ModalModule, NavbarComponent ],
+  imports: [ CommonModule, RouterModule, GrowlerModule, ModalModule, OverlayModule ],
+  exports: [ GrowlerModule, RouterModule, ModalModule, OverlayModule, NavbarComponent ],
   declarations: [ NavbarComponent ],
   providers: [ SorterService, FilterService, TrackByService, 
-               DialogService, ValidationService, AuthService ] // these should be singleton
+               DialogService, ValidationService, AuthService, EventBusService
+              ] // these should be singleton
 })
 /*
 
