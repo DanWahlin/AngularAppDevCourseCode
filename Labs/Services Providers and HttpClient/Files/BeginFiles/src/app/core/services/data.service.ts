@@ -24,16 +24,12 @@ All of the functionality provided by RxJS could be imported using:
 "import 'rxjs/Rx';"
 
 However, this can result in many unecessary objects being loaded which is why
-the individual symbols and operators are imported here. 
+the individual symbols and operators are imported below: 
 
 */
 
-//Grab everything with import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map'; 
-import 'rxjs/add/operator/catch';
+import { map, catchError } from 'rxjs/operators';
 
 import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
 
@@ -72,24 +68,24 @@ export class DataService {
 
     1. Make a call to http.get<ICustomer[]>() as shown below:
 
-        this.http.get<ICustomer[]>(`${this.customersBaseUrl}/page/${page}/${pageSize}`, {observe: 'response'})
+        return this.http.get<ICustomer[]>(
+                 `${this.customersBaseUrl}/page/${page}/${pageSize}`, 
+                 {observe: 'response'})
 
         The { observe: response } value will allow us to get full access to the response
         object including headers (which we'll need due to paging).
 
-    2. Add the "return" keyword in front of the this.http.get<ICustomer[]>() call to return the observable to the caller.
+    2. Add the following code after the http.get() call (this uses function chaining):
 
-    3. Add a map() function call after the http.get() call (chain it) that looks like the following:
+        .pipe(
+            map(customers => {
 
-        .map(res => {
+                
+            }),
+            catchError(this.handleError)
+        );
 
-        })
-
-    4. Add a catch() function call after the map() function (chain it). Pass the following into catch():
-
-        this.handleError
-
-    5. Add the following code into the map() function body:
+    3. Add the following code into the map() function body:
 
         //Access paging header and convert value to a number
         const totalRecords = +res.headers.get('X-InlineCount');
@@ -107,7 +103,7 @@ export class DataService {
             totalRecords: totalRecords
         };
 
-     6. Notice that the function returns an Observable<IPagedResults<ICustomer[]>>. You can 
+     4. Notice that the function returns an Observable<IPagedResults<ICustomer[]>>. You can 
         view the IPagedResults and ICustomer interfaces in the app/shared/interfaces.ts file.
 
     */
@@ -130,24 +126,25 @@ export class DataService {
 
         this.customersBaseUrl + '/' + id
 
-    2. Add the "return" keyword in front of the http.get<ICustomer>() call to return the observable to the caller.
+    2. Add the "return" keyword in front of the http.get<ICustomer>() call to return 
+       the observable to the caller.
 
-    3. Add a map() function call after the http.get() call (chain it) that looks like the following:
+    3. Add the following code after the http.get() call (this uses function chaining):
 
-        .map(customer => {
+        .pipe(
+            map(customer => {
 
-        })
+                
+            }),
+            catchError(this.handleError)
+        );
 
-    4. Add a catch() function call after the map() function (chain it). Pass the following into catch():
-
-        this.handleError
-
-    5. Add the following code into the map() function body:
+    4. Add the following code into the map() function body:
 
         this.calculateCustomersOrderTotal([customer]);
         return customer;
 
-    6. Add Observable<ICustomer> as the function's return type.
+    5. Add Observable<ICustomer> as the function's return type.
 
     */
     
@@ -156,13 +153,15 @@ export class DataService {
 
     }
 
-    getCustomers() : Observable<ICustomer[]> {
+    getCustomers(): Observable<ICustomer[]> {
         return this.http.get<ICustomer[]>(this.customersBaseUrl)
-                    .map(customers => {
-                        this.calculateCustomersOrderTotal(customers);
-                        return customers;
-                    })
-                    .catch(this.handleError);
+            .pipe(
+                map(customers => {
+                    this.calculateCustomersOrderTotal(customers);
+                    return customers;
+                }),
+                catchError(this.handleError)
+            );
     }
 
     /*
@@ -175,47 +174,41 @@ export class DataService {
 
     */
 
-    insertCustomer(customer: ICustomer) : Observable<ICustomer> {
+    insertCustomer(customer: ICustomer): Observable<ICustomer> {
         return this.http.post<ICustomer>(this.customersBaseUrl, customer)
-                   .catch(this.handleError);
+            .pipe(catchError(this.handleError))
     }
-    
-    updateCustomer(customer: ICustomer) : Observable<boolean> {
-        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
-                   .map(res => res.status)           
-                   .catch(this.handleError);  
-    } 
 
-    deleteCustomer(id: number) : Observable<boolean> {
-        return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
-                   .map(res => res.status)
-                   .catch(this.handleError);
+    updateCustomer(customer: ICustomer): Observable<boolean> {
+        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
+            .pipe(
+                map(res => res.status),
+                catchError(this.handleError)
+            );
     }
-    
+
+    deleteCustomer(id: number): Observable<boolean> {
+        return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
+            .pipe(
+                map(res => res.status),
+                catchError(this.handleError)
+            );
+    }
+
     getStates(): Observable<IState[]> {
         return this.http.get<IState[]>('/api/states')
-                   .catch(this.handleError); 
-    }
-    
-    private handleError(error: HttpErrorResponse) {
-        console.error('server error:', error); 
-        if (error.error instanceof Error) {
-          let errMessage = error.error.message;
-          return Observable.throw(errMessage);
-          // Use the following instead if using lite-server
-          //return Observable.throw(err.text() || 'backend server error');
-        }
-        return Observable.throw(error || 'Node.js server error');
+            .pipe(catchError(this.handleError));
     }
 
-    //Not using now but leaving since they show how to create
-    //and work with custom observables
-       
-    createObservable(data: any) : Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next(data);
-            observer.complete();
-        });
+    private handleError(error: HttpErrorResponse) {
+        console.error('server error:', error);
+        if (error.error instanceof Error) {
+            let errMessage = error.error.message;
+            return Observable.throw(errMessage);
+            // Use the following instead if using lite-server
+            //return Observable.throw(err.text() || 'backend server error');
+        }
+        return Observable.throw(error || 'Node.js server error');
     }
 
     calculateCustomersOrderTotal(customers: ICustomer[]) {
@@ -229,5 +222,18 @@ export class DataService {
             }
         }
     }
+
+    //Not using now but leaving since they show how to create
+    //and work with custom observables
+
+    //Would need following import added:
+    //import { Observer } from 'rxjs/Observer';
+    
+    // createObservable(data: any): Observable<any> {
+    //     return Observable.create((observer: Observer<any>) => {
+    //         observer.next(data);
+    //         observer.complete();
+    //     });
+    // }
 
 }
