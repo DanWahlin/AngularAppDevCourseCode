@@ -103,6 +103,7 @@ export class DataService {
             totalRecords: totalRecords
         };
 
+
      4. Notice that the function returns an Observable<IPagedResults<ICustomer[]>>. You can 
         view the IPagedResults and ICustomer interfaces in the app/shared/interfaces.ts file.
 
@@ -143,6 +144,7 @@ export class DataService {
 
         this.calculateCustomersOrderTotal([customer]);
         return customer;
+        
 
     5. Add Observable<ICustomer> as the function's return type.
 

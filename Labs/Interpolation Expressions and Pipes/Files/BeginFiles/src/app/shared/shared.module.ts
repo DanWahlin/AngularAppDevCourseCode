@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 /*
 
@@ -41,7 +40,7 @@ use the pipes and the other exported objects.
 
 @NgModule({
   imports: [CommonModule, MapModule, FilterTextboxModule, PaginationModule ],
-  exports: [ CommonModule, FormsModule, HttpModule, SortByDirective,
+  exports: [ CommonModule, FormsModule, SortByDirective,
              MapModule, FilterTextboxModule, PaginationModule ],
   declarations: [ SortByDirective ]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-component',
+  selector: 'app-root',
   template: `
     <h1>Angular Pipes</h1>
   `
