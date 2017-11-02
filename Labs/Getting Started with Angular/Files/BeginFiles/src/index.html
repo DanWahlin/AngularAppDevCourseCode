@@ -1,5 +1,13 @@
-<!doctype html>
-<html lang="en">
+<!--
+   Angular/TypeScript Hello World
+   Dan Wahlin
+
+   @DanWahlin
+   http://blog.codewithdan.com
+   http://github.com/danwahlin
+-->
+<!DOCTYPE html>
+<html>
 <head>
     <base href="/">
     <title>Angular/TypeScript Hello World Project</title>
@@ -8,7 +16,19 @@
     <meta name="description" content="Angular Hello World Starter">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/styles/styles.css" rel="stylesheet" />
+    <link href="styles/styles.css" rel="stylesheet" />
+    
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+	<script src="systemjs.config.js"></script>
+	<script>
+		System.import('app').catch(function(err){ console.error(err); });
+	</script>
+    
 </head>
 <body>
     <header class="navbar navbar-inner navbar-fixed-top">
@@ -20,7 +40,7 @@
     </header>
 
     <main class="container">
-        <!-- Root component element goes here -->
+        <!-- Root Component Element Goes Here -->
 
 
         <br /><br />
