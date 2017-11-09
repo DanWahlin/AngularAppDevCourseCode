@@ -18,10 +18,7 @@ Perform the following steps:
 
 5. Add the following code into the transform() function:
 
-   if (value) {
-     return value.charAt(0).toUpperCase() + value.slice(1);
-   }
-   return value;
+   return typeof value === 'string' && value.charAt(0).toUpperCase() + value.slice(1) || value;
 
 6. Add the @Pipe() decorator on top of the CapitalizePipe class.
 
