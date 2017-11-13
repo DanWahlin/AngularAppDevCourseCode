@@ -64,9 +64,7 @@ downloadAndExtractProjects(function(err) {
     //     overlayFiles(sampleFolder);
     // });
 
-    //Lab 1
-    copyFolder('./Angular-HelloWorld-master', './Labs/Getting Started with Angular/Begin');
-    overlayFiles('./Labs/Getting Started with Angular');
+    //Lab 1 (Angular CLI - instructor-led)
 
     //Lab 2 (TypeScript - instructor-led)
 
