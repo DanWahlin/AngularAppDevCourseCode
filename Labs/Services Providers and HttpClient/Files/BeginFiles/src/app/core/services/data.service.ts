@@ -78,7 +78,7 @@ export class DataService {
     2. Add the following code after the http.get() call (this uses function chaining):
 
         .pipe(
-            map(customers => {
+            map(res => {
 
                 
             }),
