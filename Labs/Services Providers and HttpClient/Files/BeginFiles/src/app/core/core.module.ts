@@ -33,7 +33,6 @@ import { SorterService } from './services/sorter.service';
 import { TrackByService } from './services/trackby.service';
 import { DialogService } from './services/dialog.service';
 import { EnsureModuleLoadedOnceGuard } from './ensureModuleLoadedOnceGuard';
-import { ValidationService } from './services/validation.service';
 import { AuthService } from'./services/auth.service';
 import { EventBusService } from './services/event-bus.service';
 
@@ -54,7 +53,7 @@ TODO 3: Adding HttpClientModule and DataService into CoreModule
   exports: [ GrowlerModule, RouterModule, ModalModule, OverlayModule, NavbarComponent ],
   declarations: [ NavbarComponent ],
   providers: [ SorterService, FilterService, TrackByService, 
-               DialogService, ValidationService, AuthService, EventBusService
+               DialogService, AuthService, EventBusService
               ] // these should be singleton
 })
 /*
