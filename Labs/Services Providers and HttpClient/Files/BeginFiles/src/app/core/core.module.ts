@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 TODO 1: Importing HttpClientModule
 
-Import HttpClientModule from @angular/common/http
+Import HttpClientModule and HTTP_INTERCEPTORS from @angular/common/http
 
 */
 
@@ -35,6 +35,7 @@ import { DialogService } from './services/dialog.service';
 import { EnsureModuleLoadedOnceGuard } from './ensureModuleLoadedOnceGuard';
 import { AuthService } from'./services/auth.service';
 import { EventBusService } from './services/event-bus.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 /*
 
@@ -53,7 +54,12 @@ TODO 3: Adding HttpClientModule and DataService into CoreModule
   exports: [ GrowlerModule, RouterModule, ModalModule, OverlayModule, NavbarComponent ],
   declarations: [ NavbarComponent ],
   providers: [ SorterService, FilterService, TrackByService, 
-               DialogService, AuthService, EventBusService
+               DialogService, AuthService, EventBusService,
+               {
+                 provide: HTTP_INTERCEPTORS,
+                 useClass: AuthInterceptor,
+                 multi: true,
+               } 
               ] // these should be singleton
 })
 /*
