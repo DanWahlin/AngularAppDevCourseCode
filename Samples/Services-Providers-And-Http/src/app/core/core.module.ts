@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DataService } from './data.service';
 
 @NgModule({
-    imports: [ HttpModule ],
+    imports: [ HttpClientModule ],
     providers: [ DataService ]
 })
 export class CoreModule { }

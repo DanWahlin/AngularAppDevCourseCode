@@ -5,7 +5,7 @@
            *ngFor="let order of orders">
         <tr *ngFor="let orderItem of order.orderItems">
             <td>{{ orderItem.productName }}</td>
-            <td>${{ orderItem.itemCost }}</td>    
+            <td>{{ orderItem.itemCost | currency:'USD':'symbol' }}</td>    
         </tr>
     </table>
 </div>

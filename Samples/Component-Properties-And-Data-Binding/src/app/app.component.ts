@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
 @Component({ 
-  selector: 'app-container',
+  selector: 'app-root',
   template: `
     <customers-list [customers]="people"></customers-list>
   `

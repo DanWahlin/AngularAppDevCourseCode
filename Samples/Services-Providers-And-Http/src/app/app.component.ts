@@ -4,7 +4,7 @@ import { ICustomer } from './shared/interfaces';
 import { DataService } from './core/data.service';
 
 @Component({ 
-  selector: 'app-container',
+  selector: 'app-root',
   template: `
     <customers-list [customers]="people"></customers-list>
   `

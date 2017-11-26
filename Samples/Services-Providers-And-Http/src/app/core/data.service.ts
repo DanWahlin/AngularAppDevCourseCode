@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -11,28 +11,24 @@ import { ICustomer } from '../../app/shared/interfaces';
 @Injectable()
 export class DataService {
 
-    baseUrl: string = '';
+    baseUrl: string = 'assets/';
     
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getCustomers() : Observable<ICustomer[]> {
-        return this.http.get(this.baseUrl + '/customers.json')
-                   .map((res: Response) => res.json())
+        return this.http.get(this.baseUrl + 'customers.json')
                    .catch(this.handleError);
     }
 
-    private handleError(error: any) {
-        console.error('server error:', error); 
-        if (error instanceof Response) {
-          let errMessage = '';
-          try {
-            errMessage = error.json().error;
-          } catch(err) {
-            errMessage = error.statusText;
-          }
+    private handleError(error: HttpErrorResponse) {
+      console.error('server error:', error);
+      if (error.error instanceof Error) {
+          let errMessage = error.error.message;
           return Observable.throw(errMessage);
-        }
-        return Observable.throw(error || 'Node.js server error');
-    }
+          // Use the following instead if using lite-server
+          //return Observable.throw(err.text() || 'backend server error');
+      }
+      return Observable.throw(error || 'Node.js server error');
+  }
 
 }

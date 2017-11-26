@@ -11,18 +11,18 @@ import { ICustomer, IOrder } from '../../app/shared/interfaces';
 @Injectable()
 export class DataService {
 
-    baseUrl: string = '';
+    baseUrl: string = 'assets/';
     
     constructor(private http: Http) { }
 
     getCustomers() : Observable<ICustomer[]> {
-      return this.http.get(this.baseUrl + '/customers.json')
+      return this.http.get(this.baseUrl + 'customers.json')
                   .map((res: Response) => res.json())
                   .catch(this.handleError);
     }
 
     getCustomer(id: number) : Observable<ICustomer> {
-      return this.http.get(this.baseUrl + '/customers.json')
+      return this.http.get(this.baseUrl + 'customers.json')
             .map((res: Response) => {
               let customer = res.json().filter((cust: ICustomer) => cust.id === id);
               return (customer && customer.length) ? customer[0] : null;
@@ -31,7 +31,7 @@ export class DataService {
     }
 
     getOrders(id: number) : Observable<IOrder[]> {
-      return this.http.get(this.baseUrl + '/orders.json')
+      return this.http.get(this.baseUrl + 'orders.json')
                   .map((res: Response) => {
                     let orders = res.json().filter((order: IOrder) => order.customerId === id);
                     return orders;

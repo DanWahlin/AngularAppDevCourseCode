@@ -10,8 +10,9 @@ export class CustomersListComponent implements OnInit {
 
     title: string;
     customers: ICustomer[];
-    customersOrderTotal: number = 0;
-    currencyCode: string = 'USD';
+    customersOrderTotal = 0;
+    currencyCode = 'USD';
+    bgColor = 'yellow';
 
     constructor() { }
 
