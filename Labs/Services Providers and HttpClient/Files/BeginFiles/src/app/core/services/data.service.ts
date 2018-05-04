@@ -19,16 +19,12 @@ Take a moment to examine the RxJS related imports below. Notice that
 in addition to importing Observable, individual operators such as map
 and catch are imported as well.
 
-All of the functionality provided by RxJS could be imported using:
-
-"import 'rxjs/Rx';"
-
 However, this can result in many unecessary objects being loaded which is why
 the individual symbols and operators are imported below: 
 
 */
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
@@ -229,7 +225,7 @@ export class DataService {
     //and work with custom observables
 
     //Would need following import added:
-    //import { Observer } from 'rxjs/Observer';
+    //import { Observer } from 'rxjs';
     
     // createObservable(data: any): Observable<any> {
     //     return Observable.create((observer: Observer<any>) => {
