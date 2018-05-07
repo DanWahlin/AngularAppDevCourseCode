@@ -40,7 +40,7 @@ export class CanActivateGuard {
   1. Add a canActivate() function. Refer to the Angular docs or to the course manual for details
      on the function signature. 
      
-     Hint: If your're using the VS Code editor you can right-click on CanActivate above and 
+     Hint: If you're using the VS Code editor you can right-click on CanActivate above and 
            select "Peek Definition" from the menu. This will show you the proper function
            signature to use.
 
