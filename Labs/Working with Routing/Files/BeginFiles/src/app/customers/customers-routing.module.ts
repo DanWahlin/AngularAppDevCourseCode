@@ -9,8 +9,8 @@
   3. Import the following components:
 
   CustomersComponent      ./customers.component
-  CustomersCardComponent  ./customers-card.component
-  CustomersGridComponent  ./customers-grid.component
+  CustomersCardComponent  ./customers-card/customers-card.component
+  CustomersGridComponent  ./customers-grid/customers-grid.component
 
 */
 

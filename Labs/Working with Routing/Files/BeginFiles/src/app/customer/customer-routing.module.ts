@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CustomerComponent }   from './customer.component';
-import { CustomerOrdersComponent } from './customer-orders.component';
-import { CustomerDetailsComponent } from './customer-details.component';
-import { CustomerEditComponent } from './customer-edit.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 
 /*
 
