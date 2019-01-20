@@ -1,12 +1,8 @@
 import { TestBed, ComponentFixture, getTestBed, async } from '@angular/core/testing';
-import {
-  HttpModule, ResponseOptions, Response, RequestMethod, Http,
-  BaseRequestOptions, XHRBackend
-} from '@angular/http';
 import { LocationStrategy } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CustomersComponent } from './customers.component';
 import { DataService } from '../core/data.service';
@@ -16,7 +12,8 @@ import { CapitalizePipe } from '../shared/capitalize.pipe';
 import { SorterService } from '../core/sorter.service';
 
 describe('Customers Component...', () => {
-  let mockBackend: MockBackend;
+  let dataService: DataService;
+  let httpMock: HttpTestingController;
   let fixture: ComponentFixture<CustomersComponent>;
 
   beforeEach(() => {
@@ -29,36 +26,16 @@ describe('Customers Component...', () => {
       ],
       providers: [
         DataService,
-        SorterService,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }
-        }
+        SorterService
       ],
-      imports: [HttpModule, FormsModule, RouterTestingModule]
+      imports: [HttpClientTestingModule, FormsModule, RouterTestingModule]
     });
 
-    mockBackendFunctions();
+    httpMock = TestBed.get(HttpTestingController);
     fixture = TestBed.createComponent(CustomersComponent);
     TestBed.compileComponents();
+    dataService = TestBed.get(DataService);
   });
-
-  function mockBackendFunctions() {
-    mockBackend = TestBed.get(MockBackend);
-    mockBackend.connections.subscribe(
-      (connection: MockConnection) => {
-        connection.mockRespond(new Response(
-          new ResponseOptions({
-            body: customers
-          })
-        ));
-      });
-  }
 
   it('creates a CustomersComponent instance', () => {
     fixture.detectChanges();
@@ -67,9 +44,17 @@ describe('Customers Component...', () => {
   });
 
   it('people is filled by default', () => {
+    // Trigger ngOnInit() for this scenario
     fixture.detectChanges();
 
+    // Setup mock HTTP call/data
+    const mockReq = httpMock.expectOne(dataService.baseUrl + 'customers.json');
+    // Pass in mock data
+    mockReq.flush(customers);
+
+    // Ensure that people property matches with the mock data
     expect(fixture.componentInstance.people).toBe(customers);
+    httpMock.verify();
   });
 
 });

@@ -1,12 +1,8 @@
-import { TestBed, ComponentFixture, getTestBed, async } from '@angular/core/testing';
-import {
-    HttpModule, ResponseOptions, Response, RequestMethod, Http,
-    BaseRequestOptions, XHRBackend
-} from '@angular/http';
+import { TestBed, ComponentFixture, getTestBed } from '@angular/core/testing';
 import { LocationStrategy } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { DataService } from '../core/data.service';
 import { CustomersListComponent } from '../customers-list/customers-list.component';
@@ -15,7 +11,7 @@ import { CapitalizePipe } from '../shared/capitalize.pipe';
 import { SorterService } from '../core/sorter.service';
 
 describe('CustomersList Component...', () => {
-    let mockBackend: MockBackend;
+    let httpMock: HttpTestingController;
     let fixture: ComponentFixture<CustomersListComponent>;
 
     beforeEach(() => {
@@ -27,38 +23,17 @@ describe('CustomersList Component...', () => {
             ],
             providers: [
                 DataService,
-                SorterService,
-                MockBackend,
-                BaseRequestOptions,
-                {
-                    provide: Http,
-                    deps: [MockBackend, BaseRequestOptions],
-                    useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-                        return new Http(backend, defaultOptions);
-                    }
-                }
+                SorterService
             ],
-            imports: [HttpModule, FormsModule, RouterTestingModule]
+            imports: [HttpClientTestingModule, FormsModule, RouterTestingModule]
         });
 
         let testBed = getTestBed();
+        httpMock = TestBed.get(HttpTestingController);
         fixture = TestBed.createComponent(CustomersListComponent);
-
         TestBed.compileComponents();
 
     });
-
-    function mockBackendFunctions() {
-        mockBackend = TestBed.get(MockBackend);
-        mockBackend.connections.subscribe(
-            (connection: MockConnection) => {
-                connection.mockRespond(new Response(
-                    new ResponseOptions({
-                        body: customers
-                    })
-                ));
-            });
-    }
 
     it('customers is empty array by default', () => {
         fixture.detectChanges();
