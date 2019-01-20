@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { DataService } from './data.service';
@@ -26,6 +26,11 @@ describe('DataService Tests', () => {
   it('should be created', () => {
     expect(dataService).toBeTruthy();
   });
+
+  // Another way we could get to DataService (via injection)
+  it('should be created with inject', inject([DataService], (service: DataService) => {        
+    expect(service).toBeTruthy();  
+  })); 
 
   it('should use HTTP call in getCustomers()', () => {
     dataService.getCustomers().subscribe(data => {
