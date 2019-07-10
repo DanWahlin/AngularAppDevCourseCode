@@ -59,7 +59,8 @@ TODO 3: Adding HttpClientModule and DataService into CoreModule
                  provide: HTTP_INTERCEPTORS,
                  useClass: AuthInterceptor,
                  multi: true,
-               } 
+               },
+               { provide: 'Window', useFactory: () => window }
               ] // these should be singleton
 })
 /*

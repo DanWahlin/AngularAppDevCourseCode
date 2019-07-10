@@ -4,7 +4,7 @@ TODO 1: Importing Symbols from Angular Modules
 
 Import the following symbols from the respective modules:
         
-Injectable                      @angular/core
+Injectable, Inject              @angular/core
 HttpClient, HttpErrorResponse   @angular/common/http 
 
 */
@@ -40,8 +40,10 @@ Add the Injectable decorator above the DataService class.
 
 export class DataService {
   
-    customersBaseUrl: string = '/api/customers';
-    ordersBaseUrl: string = '/api/orders';
+    port = (this.window.location.port) ? ':' + this.window.location.port : '';
+    baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}${this.port}`;
+    customersBaseUrl = this.baseUrl + '/api/customers';
+    ordersBaseUrl = this.baseUrl + '/api/orders';
     orders: IOrder[];
     states: IState[];
 
@@ -51,10 +53,11 @@ export class DataService {
 
     Inject the HttpClient object into the constructor. Give the injected parameter 
     a name of "http" and make it private so that a property is automatically created.
+    You can add it after the Window parameter that is already in the constructor.
 
     */
 
-    constructor() { }
+    constructor(@Inject('Window') private window: Window) { }
 
     /*
 
