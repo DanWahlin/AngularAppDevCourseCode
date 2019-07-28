@@ -17,8 +17,8 @@ import { RouterModule, Routes } from '@angular/router';
   Add the following routes into the app_routes constant below. Ensure that you add them 
   AFTER the first path: '' route.
 
-  { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
-  { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
+  { path: 'customers/:id', data: { preload: true }, loadChildren: () => import('app/customer/customer.module').then(m => m.CustomerModule) },
+  { path: 'customers', loadChildren: () => import('app/customers/customers.module').then(m => m.CustomersModule) },
 
   The loadChildren property will cause these routes to "lazy load" the associated modules and 
   avoid blocking the homepage while the module scripts load. We'll load them in the background
@@ -31,8 +31,8 @@ const app_routes: Routes = [
   //Add new routes here
 
 
-  { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' },
-  { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
+  { path: 'orders', data: { preload: true }, loadChildren: () => import('app/orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'about', loadChildren: () => import('app/about/about.module').then(m => m.AboutModule) },
   { path: '**', pathMatch:'full', redirectTo: '/customers' } //catch any unfound routes and redirect to home page
 ];
 
