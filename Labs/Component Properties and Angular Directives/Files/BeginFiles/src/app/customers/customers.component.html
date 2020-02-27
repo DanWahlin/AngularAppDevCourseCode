@@ -15,7 +15,7 @@
 
             TODO 1:  Adding Property and Event Bindings
  
-            1. Locate the first <a> tag below (inside of the first <li>). Add a click event
+            1. Locate the *first* <a> tag below (inside of the *first* <li>). Add a click event
                binding that calls the following function to change the display to show the card view:
 
                changeDisplayMode(displayModeEnum.Card)
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="toolbar-item">
-                            <a (click)="changeDisplayMode(displayModeEnum.Map)" [class.active]="displayMode === displayModeEnum.Map">
+                            <a (click)="lazyLoadMapComponent()" [class.active]="displayMode === displayModeEnum.Map">
                                 <span class="glyphicon glyphicon-map-marker"></span> Map View
                             </a>
                         </li>
@@ -101,28 +101,28 @@
         -->
 
 
+        <!-- lazy load the map component -->
+        <div [hidden]="displayMode !== displayModeEnum.Map">
+            <ng-container #mapsContainer></ng-container>
+        </div>
 
-        <!--
-
-            TODO 4:  Exploring the Map Component 
-            
-            Open src/app/shared/map/map.component.ts and take a moment to explore the code.
-            This component is responsible for rendering the customer locations using Google Maps.
-
-            Notice how the component exposes several Input properties.
-
+        <!-- 
+            This could be used to eagerly load the map component.
+            Would need to import MapModule into either SharedModule (and export it) or 
+            into CustomersModule to use it this way.
         -->
-
-        <cm-map *ngIf="filteredCustomers.length" 
+        <!-- <cm-map *ngIf="filteredCustomers.length" 
             [zoom]="2" 
             [enabled]="displayMode === displayModeEnum.Map" 
             [hidden]="displayMode !== displayModeEnum.Map">
-          <cm-map-point 
+        <cm-map-point 
             *ngFor="let customer of filteredCustomers" 
             [latitude]="customer.latitude" 
             [longitude]="customer.longitude"
-            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</a></h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
-        </cm-map>
+            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
+        </cm-map> -->
+
+
 
         <!--
 

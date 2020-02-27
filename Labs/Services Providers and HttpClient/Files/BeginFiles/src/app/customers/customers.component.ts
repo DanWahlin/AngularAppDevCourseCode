@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+  
+import { Component, OnInit, ViewChild, 
+  ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
+
+
 
 /*
 
@@ -11,8 +15,8 @@ TODO 1: Import DataService and Custom Interfaces
 */
 
 
-
 import { FilterService } from '../core/services/filter.service';
+import { LoggerService } from '../core/services/logger.service';
 
 @Component({ 
   selector: 'cm-customers', 
@@ -23,11 +27,25 @@ export class CustomersComponent implements OnInit {
   title: string;
   filterText: string;
   customers: ICustomer[] = [];
-  filteredCustomers: ICustomer[] = [];
   displayMode: DisplayModeEnum;
   displayModeEnum = DisplayModeEnum;
-  totalRecords: number = 0;
-  pageSize: number = 10;
+  totalRecords = 0;
+  pageSize = 10;
+  mapComponentRef: ComponentRef<any>;
+  _filteredCustomers: ICustomer[] = [];
+
+  get filteredCustomers() {
+    return this._filteredCustomers;
+  }
+
+  set filteredCustomers(value: ICustomer[]) {
+    this._filteredCustomers = value;
+    this.updateMapComponentDataPoints();
+  }
+
+  @ViewChild('mapsContainer', { read: ViewContainerRef }) 
+  private mapsViewContainerRef: ViewContainerRef;
+
 
   /*
 
@@ -38,7 +56,9 @@ export class CustomersComponent implements OnInit {
 
   */
 
-  constructor(private filterService: FilterService) { }
+ constructor(private componentFactoryResolver: ComponentFactoryResolver,
+  private filterService: FilterService,
+  private logger: LoggerService) { }
   
   ngOnInit() {
     this.title = 'Customers';
@@ -101,11 +121,31 @@ export class CustomersComponent implements OnInit {
         data = data.toUpperCase();
         const props = ['firstName', 'lastName', 'city', 'state.name'];
         this.filteredCustomers = this.filterService.filter<ICustomer>(this.customers, data, props);
-    }
-    else {
+    } else {
       this.filteredCustomers = this.customers;
     }
   }
+
+  async lazyLoadMapComponent() {
+    this.changeDisplayMode(DisplayModeEnum.Map);
+    if (!this.mapsViewContainerRef.length) {
+      // Lazy load MapComponent
+      const { MapComponent } = await import('../shared/map/map.component');
+      console.log('Lazy loaded map component!');
+      const component = this.componentFactoryResolver.resolveComponentFactory(MapComponent);
+      this.mapComponentRef = this.mapsViewContainerRef.createComponent(component);
+      this.mapComponentRef.instance.zoom = 2;
+      this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
+      this.mapComponentRef.instance.enabled = true;
+    }
+  }
+
+  updateMapComponentDataPoints() {
+    if (this.mapComponentRef) {
+      this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
+    }
+  }
+
 }
 
 enum DisplayModeEnum {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 
 /*
 
@@ -14,6 +14,7 @@ TODO 1: Exploring the Code and Importing a Symbol
 import { DataService } from '../core/services/data.service';
 import { ICustomer, IPagedResults } from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
+import { LoggerService } from '../core/services/logger.service';
 
 /*
 
@@ -50,13 +51,29 @@ export class CustomersComponent  {
   title: string;
   filterText: string;
   customers: ICustomer[] = [];
-  filteredCustomers: ICustomer[] = [];
   displayMode: DisplayModeEnum;
   displayModeEnum = DisplayModeEnum;
-  totalRecords: number = 0;
-  pageSize: number = 10;
+  totalRecords = 0;
+  pageSize = 10;
+  mapComponentRef: ComponentRef<any>;
+  _filteredCustomers: ICustomer[] = [];
 
-  constructor(private dataService: DataService, private filterService: FilterService) { }
+  get filteredCustomers() {
+    return this._filteredCustomers;
+  }
+
+  set filteredCustomers(value: ICustomer[]) {
+    this._filteredCustomers = value;
+    this.updateMapComponentDataPoints();
+  }
+
+  @ViewChild('mapsContainer', { read: ViewContainerRef }) 
+  private mapsViewContainerRef: ViewContainerRef;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+    private dataService: DataService,
+    private filterService: FilterService,
+    private logger: LoggerService) { }
   
   //Add ngOnInit() here
 
@@ -78,8 +95,8 @@ export class CustomersComponent  {
           this.customers = this.filteredCustomers = response.results;
           this.totalRecords = response.totalRecords;
         },
-        (err: any) => console.log(err),
-        () => console.log('getCustomersPage() retrieved customers for page: ' + page));
+        (err: any) => this.logger.log(err),
+        () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
   }
 
   filterChanged(data: string) {
@@ -87,11 +104,32 @@ export class CustomersComponent  {
         data = data.toUpperCase();
         const props = ['firstName', 'lastName', 'city', 'state.name'];
         this.filteredCustomers = this.filterService.filter<ICustomer>(this.customers, data, props);
-    }
-    else {
+    } else {
       this.filteredCustomers = this.customers;
     }
   }
+
+  async lazyLoadMapComponent() {
+    this.changeDisplayMode(DisplayModeEnum.Map);
+    if (!this.mapsViewContainerRef.length) {
+      // Lazy load MapComponent
+      const { MapComponent } = await import('../shared/map/map.component');
+      console.log('Lazy loaded map component!');
+      const component = this.componentFactoryResolver.resolveComponentFactory(MapComponent);
+      this.mapComponentRef = this.mapsViewContainerRef.createComponent(component);
+      this.mapComponentRef.instance.zoom = 2;
+      this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
+      this.mapComponentRef.instance.enabled = true;
+    }
+  }
+
+  updateMapComponentDataPoints() {
+    if (this.mapComponentRef) {
+      this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
+    }
+  }
+
+
 }
 
 enum DisplayModeEnum {
