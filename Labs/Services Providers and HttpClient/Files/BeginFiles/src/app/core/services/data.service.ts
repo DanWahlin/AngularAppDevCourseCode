@@ -51,9 +51,14 @@ export class DataService {
 
     TODO 4: Inject HttpClient
 
-    Inject the HttpClient object into the constructor. Give the injected parameter 
-    a name of "http" and make it private so that a property is automatically created.
-    You can add it after the Window parameter that is already in the constructor.
+    Inject the HttpClient object into the constructor shown below.
+    
+    IMPORTANT!!!! DO NOT use the @Inject() decorator shown below when injecting HttpClient. 
+    It is a unique use case for the Window object.
+    
+    Give the injected parameter a name of "http" and make it private so that a property is automatically created.
+    You can add it after the Window parameter that is already in the constructor. Refer to the course manual
+    if you need help with this step.
 
     */
 
