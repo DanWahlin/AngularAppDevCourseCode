@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { ICustomer } from '../../shared/interfaces';
+import { DataService } from '../../core/services/data.service';
 
 /*
 
   TODO 1: Exploring Imported Routing Symbols
 
-  Note that ActivatedRoute and Params are imported from @angular/router.
+  Note that ActivatedRoute and Params are imported from @angular/router above.
   These items will be used to retrieve a route parameter from the URL.
 
 */
-import { ActivatedRoute, Params } from '@angular/router';
 
-import { ICustomer } from '../../shared/interfaces';
-import { DataService } from '../../core/services/data.service';
 
 @Component({
   selector: 'cm-customer-details',
@@ -22,6 +23,10 @@ export class CustomerDetailsComponent implements OnInit {
 
   customer: ICustomer;
   mapEnabled: boolean;
+  mapComponentRef: ComponentRef<any>;
+
+  @ViewChild('mapsContainer', { read: ViewContainerRef }) 
+  private mapsViewContainerRef: ViewContainerRef;
 
   /*
 
@@ -32,7 +37,9 @@ export class CustomerDetailsComponent implements OnInit {
 
   */
 
-  constructor(private dataService: DataService) { }
+  constructor( 
+    private dataService: DataService,
+    private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
       /*
@@ -46,8 +53,8 @@ export class CustomerDetailsComponent implements OnInit {
 
             });
 
-        2. Add the following code inside of the arrow function to retrieve the "id" 
-           route parameter:
+        2. Add the following code INSIDE of the arrow function you created in the previous step to 
+           retrieve the "id" route parameter:
 
             let id = +params['id'];
 
@@ -57,11 +64,15 @@ export class CustomerDetailsComponent implements OnInit {
         3. Add the following code immediately after the previous code you added in the 
            array function to retrieve the customer using the id route parameter value:
 
-             this.dataService.getCustomer(id)
-                 .subscribe((customer: ICustomer) => {
-                   this.customer = customer;
-                   this.mapEnabled = true;
-                 });
+            if (id) {
+              this.dataService.getCustomer(id)
+                .subscribe((customer: ICustomer) => {
+                  this.customer = customer;
+                  if (this.customer && this.customer.latitude) {
+                    this.lazyLoadMapComponent();
+                  }
+                });
+            }
 
       */
 
@@ -69,5 +80,17 @@ export class CustomerDetailsComponent implements OnInit {
 
   }
 
+  async lazyLoadMapComponent() {
+    if (!this.mapsViewContainerRef.length) {
+      // Lazy load MapComponent
+      const { MapComponent } = await import('../../shared/map/map.component');
+      console.log('Lazy loaded map component!');
+      const component = this.componentFactoryResolver.resolveComponentFactory(MapComponent);
+      this.mapComponentRef = this.mapsViewContainerRef.createComponent(component);
+      this.mapComponentRef.instance.zoom = 10;
+      this.mapComponentRef.instance.customer = this.customer;
+      this.mapComponentRef.instance.enabled = true;
+    }
+  }
 
 }
