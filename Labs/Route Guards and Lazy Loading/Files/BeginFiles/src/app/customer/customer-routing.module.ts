@@ -23,16 +23,15 @@ import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 */
 
 const routes: Routes = [
-      { 
-        path: 'customers/:id', 
-        component: CustomerComponent,
-        children: [
-            { path: 'orders', component: CustomerOrdersComponent },
-            { path: 'details', component: CustomerDetailsComponent },
-            { path: 'edit', component: CustomerEditComponent }
-        ]
-      }
-
+    { 
+      path: 'customers/:id', 
+      component: CustomerComponent,
+      children: [
+          { path: 'orders', component: CustomerOrdersComponent },
+          { path: 'details', component: CustomerDetailsComponent },
+          { path: 'edit', component: CustomerEditComponent }
+      ]
+    }
 ];
 
 

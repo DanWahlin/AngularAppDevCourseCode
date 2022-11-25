@@ -33,7 +33,7 @@ const app_routes: Routes = [
 
   { path: 'orders', data: { preload: true }, loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
-  { path: '**', pathMatch:'full', redirectTo: '/customers' } //catch any unfound routes and redirect to home page
+  { path: '**', pathMatch: 'full', redirectTo: '/customers' } // catch any unfound routes and redirect to home page
 ];
 
 /*
