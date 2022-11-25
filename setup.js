@@ -22,9 +22,8 @@ function overlayFiles(targetDir, overlayItems) {
 }
 
 function downloadAndExtractProjects(callback) {
-    var repos = [{ name: 'angular-jumpstart', url: 'https://github.com/DanWahlin/Angular-JumpStart/archive/master.zip' },
-                 { name: 'angular-barebones', url: 'https://github.com/DanWahlin/Angular-BareBones/archive/master.zip' },
-                 { name: 'angular-helloworld', url: 'https://github.com/DanWahlin/Angular-HelloWorld/archive/master.zip' },
+    var repos = [{ name: 'angular-jumpstart', url: 'https://github.com/DanWahlin/Angular-JumpStart/archive/main.zip' },
+                 { name: 'angular-helloworld', url: 'https://github.com/DanWahlin/Angular-HelloWorld/archive/main.zip' },
                  { name: 'angular-forms', url: 'https://github.com/DanWahlin/Angular-Forms/archive/master.zip' } ];
 
     let pending = repos.length;
@@ -58,8 +57,8 @@ downloadAndExtractProjects(function(err) {
     //                      './Samples/Services-Providers-And-Http'];
 
     // sampleFolders.forEach(function(sampleFolder) {
-    //     copyFolder('./Angular-HelloWorld-master', sampleFolder + '/Begin');
-    //     copyFolder('./Angular-HelloWorld-master', sampleFolder + '/End');
+    //     copyFolder('./Angular-HelloWorld-main', sampleFolder + '/Begin');
+    //     copyFolder('./Angular-HelloWorld-main', sampleFolder + '/End');
     //     //Overlay Begin/End Files into respective Begin/End folder
     //     overlayFiles(sampleFolder);
     // });
@@ -68,38 +67,38 @@ downloadAndExtractProjects(function(err) {
 
     //Lab 2 (TypeScript - instructor-led)
 
-    //Lab 3 (Uses the Angular-JumpStart-master source code)
+    //Lab 3 (Uses the Angular-JumpStart-main source code)
 
     //Lab 4
-    copyFolder('./Angular-JumpStart-master', './Labs/Components and Modules/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Components and Modules/Begin');
     overlayFiles('./Labs/Components and Modules');
 
     //Lab 5
-    copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/BeginPipesAndBindings');
-    copyFolder('./Angular-HelloWorld-master', './Labs/Interpolation Expressions and Pipes/EndPipesAndBindings');
+    copyFolder('./Angular-HelloWorld-main', './Labs/Interpolation Expressions and Pipes/BeginPipesAndBindings');
+    copyFolder('./Angular-HelloWorld-main', './Labs/Interpolation Expressions and Pipes/EndPipesAndBindings');
     overlayFiles('./Labs/Interpolation Expressions and Pipes', [ { from:'Files/BeginPipesAndBindingsFiles', to: 'BeginPipesAndBindings',  }, { from: 'Files/EndPipesAndBindingsFiles', to: 'EndPipesAndBindings' }]);
 
-    copyFolder('./Angular-JumpStart-master', './Labs/Interpolation Expressions and Pipes/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Interpolation Expressions and Pipes/Begin');
     overlayFiles('./Labs/Interpolation Expressions and Pipes');
 
     //Lab 6
-    copyFolder('./Angular-JumpStart-master', './Labs/Component Properties and Angular Directives/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Component Properties and Angular Directives/Begin');
     overlayFiles('./Labs/Component Properties and Angular Directives');
 
     //Lab 7
-    copyFolder('./Angular-JumpStart-master', './Labs/Services Providers and HttpClient/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Services Providers and HttpClient/Begin');
     overlayFiles('./Labs/Services Providers and HttpClient');
 
     //Lab 8
-    copyFolder('./Angular-JumpStart-master', './Labs/Working with Routing/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Working with Routing/Begin');
     overlayFiles('./Labs/Working with Routing');
 
     //Lab 9
-    copyFolder('./Angular-JumpStart-master', './Labs/Route Guards and Lazy Loading/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Route Guards and Lazy Loading/Begin');
     overlayFiles('./Labs/Route Guards and Lazy Loading');
 
     //Lab 10
-    copyFolder('./Angular-JumpStart-master', './Labs/Template and Reactive Forms/Begin');
+    copyFolder('./Angular-JumpStart-main', './Labs/Template and Reactive Forms/Begin');
     overlayFiles('./Labs/Template and Reactive Forms');
 
 });

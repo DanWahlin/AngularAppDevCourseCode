@@ -29,7 +29,7 @@ templateUrl: './app.component.html'
 
 /*
 
-TODO 3: Adding a Class and Constructor
+TODO 3: Adding a Class
 
 1. Create a class named AppComponent (ensure that you export it!) 
    below this TODO task.

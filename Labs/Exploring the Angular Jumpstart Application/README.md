@@ -1,1 +1,1 @@
-This lab uses the Angular-Jumpstart-master folder. Refer to the lab manual for more details.
+This lab uses the Angular-Jumpstart-main folder. Refer to the lab manual for more details.
