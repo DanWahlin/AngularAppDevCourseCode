@@ -24,14 +24,14 @@ import { LoggerService } from '../core/services/logger.service';
 })
 export class CustomersComponent implements OnInit {
 
-  title: string;
-  filterText: string;
+  title: string = '';
+  filterText: string = '';
   customers: ICustomer[] = [];
-  displayMode: DisplayModeEnum;
+  displayMode: DisplayModeEnum = DisplayModeEnum.Card;
   displayModeEnum = DisplayModeEnum;
   totalRecords = 0;
   pageSize = 10;
-  mapComponentRef: ComponentRef<any>;
+  mapComponentRef: ComponentRef<any> = {} as ComponentRef<any>;
   _filteredCustomers: ICustomer[] = [];
 
   get filteredCustomers() {
@@ -44,7 +44,7 @@ export class CustomersComponent implements OnInit {
   }
 
   @ViewChild('mapsContainer', { read: ViewContainerRef }) 
-  private mapsViewContainerRef: ViewContainerRef;
+  private mapsViewContainerRef: ViewContainerRef = {} as ViewContainerRef;
 
 
   /*
@@ -104,8 +104,8 @@ export class CustomersComponent implements OnInit {
     4. Add the following code after the subscribe() function to log any errors
        and also log a message each time getCustomersPage() is called:
       
-         (err: any) => console.log(err),
-         () => console.log('getCustomersPage() retrieved customers for page: ' + page));
+        (err: any) => this.logger.log(err),
+        () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
 
     */
 
@@ -132,8 +132,7 @@ export class CustomersComponent implements OnInit {
       // Lazy load MapComponent
       const { MapComponent } = await import('../shared/map/map.component');
       console.log('Lazy loaded map component!');
-      const component = this.componentFactoryResolver.resolveComponentFactory(MapComponent);
-      this.mapComponentRef = this.mapsViewContainerRef.createComponent(component);
+      this.mapComponentRef = this.mapsViewContainerRef.createComponent(MapComponent);
       this.mapComponentRef.instance.zoom = 2;
       this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
       this.mapComponentRef.instance.enabled = true;
@@ -141,10 +140,11 @@ export class CustomersComponent implements OnInit {
   }
 
   updateMapComponentDataPoints() {
-    if (this.mapComponentRef) {
+    if (this.mapComponentRef && this.mapComponentRef.instance) {
       this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
     }
   }
+
 
 }
 

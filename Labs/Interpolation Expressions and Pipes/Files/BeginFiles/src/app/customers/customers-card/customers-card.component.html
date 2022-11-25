@@ -14,9 +14,6 @@
 
             3. Apply the capitalize pipe to both properties.
 
-            4. Find the {{ customer.gender }} binding below (on an <img> tag) and 
-               add the lowercase pipe.
-
         -->
                     <a [routerLink]="['/customers',customer.id,'details']" class="white">
  
@@ -30,7 +27,7 @@
                     <div class="clearfix">
                         <div class="pull-left card-body-left">
                             <a href="#" class="white">
-                                <img src="assets/images/{{ customer.gender }}.png" class="card-image" />
+                                <img src="assets/images/{{customer.gender | lowercase}}.png" class="card-image" />
                             </a>
                         </div>
                         <div class="pull-left card-body-right">

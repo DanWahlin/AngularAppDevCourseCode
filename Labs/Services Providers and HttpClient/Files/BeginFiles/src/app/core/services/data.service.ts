@@ -4,7 +4,7 @@ TODO 1: Importing Symbols from Angular Modules
 
 Import the following symbols from the respective modules:
         
-Injectable, Inject              @angular/core
+Injectable                      @angular/core
 HttpClient, HttpErrorResponse   @angular/common/http 
 
 */
@@ -24,45 +24,43 @@ the individual symbols and operators are imported below:
 
 */
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
+import { UtilitiesService } from './utilities.service';
 
 /*
 
 TODO 3: Add the Injectable Decorator 
 
-Add the Injectable decorator above the DataService class.
+Add the Injectable decorator above the DataService class. It's important to note that
+since `providedIn: 'root'` isn't being used here the DataService class must be 
+provided in the core.module.ts file.
 
 */
 
 
 export class DataService {
-  
-    port = (this.window.location.port) ? ':' + this.window.location.port : '';
-    baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}${this.port}`;
+    baseUrl = this.utilitiesService.getApiUrl();
     customersBaseUrl = this.baseUrl + '/api/customers';
     ordersBaseUrl = this.baseUrl + '/api/orders';
-    orders: IOrder[];
-    states: IState[];
+    orders: IOrder[] = [];
+    states: IState[] = [];
 
     /*
 
     TODO 4: Inject HttpClient
 
     Inject the HttpClient object into the constructor shown below.
-    
-    IMPORTANT!!!! DO NOT use the @Inject() decorator shown below when injecting HttpClient. 
-    It is a unique use case for the Window object.
-    
+       
     Give the injected parameter a name of "http" and make it private so that a property is automatically created.
-    You can add it after the Window parameter that is already in the constructor. Refer to the course manual
+    You can add it before or after the utilitiesService parameter that is already in the constructor. Refer to the course manual
     if you need help with this step.
 
     */
 
-    constructor(@Inject('Window') private window: Window) { }
+    constructor(private utilitiesService: UtilitiesService) {  }
 
     /*
 
@@ -91,11 +89,12 @@ export class DataService {
 
     3. Add the following code into the map() function body:
 
-        //Access paging header and convert value to a number
-        const totalRecords = +res.headers.get('X-InlineCount');
+        //Access paging header and convert total to a number
+        const xInlineCount = res.headers.get('X-InlineCount');
+        const totalRecords = Number(xInlineCount);
 
         //Access returned customer data
-        let customers = res.body as ICustomer[];
+        const customers = res.body as ICustomer[];
 
         //Add up the order total for each customer
         this.calculateCustomersOrderTotal(customers);
@@ -113,18 +112,30 @@ export class DataService {
 
     */
 
-    getCustomersPage(page: number, pageSize: number) : Observable<IPagedResults<ICustomer[]>> {
+    getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
 
-                   
+
+
+
 
     }
-    
+
+    getCustomers(): Observable<ICustomer[]> {
+        return this.http.get<ICustomer[]>(this.customersBaseUrl)
+            .pipe(
+                map(customers => {
+                    this.calculateCustomersOrderTotal(customers);
+                    return customers;
+                }),
+                catchError(this.handleError)
+            );
+    }
 
     /*
 
     TODO 6: Use the HttpClient Object to Retrieve a Single Customer
 
-    This TODO will be quite similar to what you did in the previous one. In this TODO
+    This TODO will be similar to what you did in the previous one. In this TODO
     you'll add code to retrieve a single customer from the server using the HttpClient.
 
     1. Make a call to http.get<ICustomer>() and pass the following template string to it:
@@ -150,24 +161,12 @@ export class DataService {
         return customer;
         
 
-    5. Add Observable<ICustomer> as the function's return type.
-
     */
-    
-    getCustomer(id: number) {
+
+    getCustomer(id: number): Observable<ICustomer> {
 
 
-    }
 
-    getCustomers(): Observable<ICustomer[]> {
-        return this.http.get<ICustomer[]>(this.customersBaseUrl)
-            .pipe(
-                map(customers => {
-                    this.calculateCustomersOrderTotal(customers);
-                    return customers;
-                }),
-                catchError(this.handleError)
-            );
     }
 
     /*
@@ -182,7 +181,7 @@ export class DataService {
 
     insertCustomer(customer: ICustomer): Observable<ICustomer> {
         return this.http.post<ICustomer>(this.customersBaseUrl, customer)
-            .pipe(catchError(this.handleError))
+            .pipe(catchError(this.handleError));
     }
 
     updateCustomer(customer: ICustomer): Observable<boolean> {
@@ -202,26 +201,26 @@ export class DataService {
     }
 
     getStates(): Observable<IState[]> {
-        return this.http.get<IState[]>('/api/states')
+        return this.http.get<IState[]>(this.baseUrl + '/api/states')
             .pipe(catchError(this.handleError));
     }
 
     private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);
         if (error.error instanceof Error) {
-            let errMessage = error.error.message;
-            return Observable.throw(errMessage);
+            const errMessage = error.error.message;
+            return throwError(() => errMessage);
             // Use the following instead if using lite-server
-            //return Observable.throw(err.text() || 'backend server error');
+            // return Observable.throw(err.text() || 'backend server error');
         }
-        return Observable.throw(error || 'Node.js server error');
+        return throwError(() => error || 'Node.js server error');
     }
 
     calculateCustomersOrderTotal(customers: ICustomer[]) {
-        for (let customer of customers) {
+        for (const customer of customers) {
             if (customer && customer.orders) {
                 let total = 0;
-                for (let order of customer.orders) {
+                for (const order of customer.orders) {
                     total += order.itemCost;
                 }
                 customer.orderTotal = total;
@@ -229,17 +228,18 @@ export class DataService {
         }
     }
 
-    //Not using now but leaving since they show how to create
-    //and work with custom observables
+    // Not using now but leaving since they show how to create
+    // and work with custom observables
 
-    //Would need following import added:
-    //import { Observer } from 'rxjs';
-    
+    // Would need following import added:
+    // import { Observer } from 'rxjs';
+
     // createObservable(data: any): Observable<any> {
     //     return Observable.create((observer: Observer<any>) => {
     //         observer.next(data);
     //         observer.complete();
     //     });
     // }
+    
 
 }

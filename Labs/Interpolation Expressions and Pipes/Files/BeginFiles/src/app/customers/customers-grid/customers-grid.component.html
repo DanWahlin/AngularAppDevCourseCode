@@ -6,11 +6,11 @@
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th cm-sort-by="firstName" (sorted)="sort($event)">First Name</th>
-                            <th cm-sort-by="lastName" (sorted)="sort($event)">Last Name</th>
-                            <th cm-sort-by="address" (sorted)="sort($event)">Address</th>
-                            <th cm-sort-by="city" (sorted)="sort($event)">City</th>
-                            <th cm-sort-by="state.name" (sorted)="sort($event)">State</th>
+                            <th cmSortBy="firstName" (sorted)="sort($event)">First Name</th>
+                            <th cmSortBy="lastName" (sorted)="sort($event)">Last Name</th>
+                            <th cmSortBy="address" (sorted)="sort($event)">Address</th>
+                            <th cmSortBy="city" (sorted)="sort($event)">City</th>
+                            <th cmSortBy="state.name" (sorted)="sort($event)">State</th>
                             <!-- Or you can do this directly rather than using sort-by directive -->
                             <th (click)="sort('orderTotal')">Order Total</th>
                             <th>&nbsp;</th>
@@ -20,24 +20,21 @@
                     <!--
 
                         TODO: Adding Binding Expressions and Pipes
-
-                        1. Add the lowercase pipe to the customer.gender binding below (on the <img> tag).
-                        
-                        2. Add the capitalize pipe to the following binding expressions below:
+                      
+                        1. Add the capitalize pipe to the following binding expressions below:
                         
                            customer.firstName
                            customer.lastName
 
-                        3. Add the trim pipe to the customer.city binding.
+                        2. Add the trim pipe to the customer.city binding.
 
-                        4. Add the currency pipe to the customer.orderTotal binding. Pass it a
+                        3. Add the currency pipe to the customer.orderTotal binding. Pass it a
                            'USD' value and make it to show the currency symbol.
-
 
                     -->
                         <tr *ngFor="let customer of customers;trackBy:trackbyService.customer">
-                            <td><img src="assets/images/{{ customer.gender }}.png"
-                                    class="grid-image" alt="Customer Image" /></td>
+                            <td><img src="assets/images/{{ customer.gender | lowercase }}.png"
+                                class="grid-image" alt="Customer Image" /></td>
                             <td><a [routerLink]="['/customers',customer.id,'details']">{{ customer.firstName }}</a></td>
                             <td>{{ customer.lastName }}</td>
                             <td>{{ customer.address }}</td>
@@ -48,7 +45,7 @@
                         </tr>
                         <tr *ngIf="!customers.length">
                             <td>&nbsp;</td>
-                            <td colspan="6">No Records Found</td>
+                            <td colspan="7">No Records Found</td>
                         </tr>
                     </tbody>
                 </table>
