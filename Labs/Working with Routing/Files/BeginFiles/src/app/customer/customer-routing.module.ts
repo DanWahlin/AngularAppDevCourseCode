@@ -62,7 +62,8 @@ export class CustomerRoutingModule {
     Note that the components property below contains all of the components used
     in the routes. This technique was shown earlier (in the customers routing) but as a review, the 
     components are defined here so that we don't have to import them again in the feature
-    module (CustomerModule in this example).
+    module (CustomerModule in this example). Not a required technique, but something that can be used 
+    to minimize the number of imports in the feature module.
 
   */
 

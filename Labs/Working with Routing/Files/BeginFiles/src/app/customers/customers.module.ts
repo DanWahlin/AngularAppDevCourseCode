@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
   3. Add CustomersRoutingModule.components into the NgModule decorator's declarations array.
 
   By defining the customers routing components and related child components in 
-  CustomersRoutingModule's "components" property we can easily access those in any other 
+  CustomersRoutingModule's static "components" property, we can easily access those in any other 
   module that imports CustomersRoutingModule. This saves us from writing all of the import 
   statements again in this module.
 
