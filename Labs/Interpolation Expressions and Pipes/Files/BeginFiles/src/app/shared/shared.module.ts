@@ -12,7 +12,6 @@ these modules are used in the customers component view and elsewhere in the appl
 */
 
 import { FilterTextboxModule } from './filter-textbox/filter-textbox.module';
-import { MapModule } from './map/map.module';
 import { PaginationModule } from './pagination/pagination.module';
 
 /*
@@ -39,9 +38,8 @@ use the pipes and the other exported objects.
 */
 
 @NgModule({
-  imports: [CommonModule, MapModule, FilterTextboxModule, PaginationModule ],
-  exports: [ CommonModule, FormsModule, SortByDirective,
-             MapModule, FilterTextboxModule, PaginationModule ],
+  imports: [CommonModule, FilterTextboxModule, PaginationModule ],
+  exports: [ CommonModule, FormsModule, SortByDirective, FilterTextboxModule, PaginationModule ],
   declarations: [ SortByDirective ]
 })
 export class SharedModule { }
