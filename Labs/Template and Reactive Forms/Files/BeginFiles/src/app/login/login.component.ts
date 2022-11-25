@@ -6,6 +6,7 @@ TODO 1: Import Reactive Forms Symbols and a Custom Validation Service
 
 1. Import the following from @angular/forms:
 
+    AbstractControl
     FormBuilder
     FormGroup
     Validators
@@ -13,7 +14,7 @@ TODO 1: Import Reactive Forms Symbols and a Custom Validation Service
 2. Import ValidationService from '../core/services/validation.service'
 
 ValidationService contains different validation functions that can check for a valid 
-email address, credit card number, password, etc. Take a moment to explore the service.
+email address, credit card number, password, etc. Take a moment to open and explore the service.
 
 */
 
@@ -22,6 +23,7 @@ email address, credit card number, password, etc. Take a moment to explore the s
 import { AuthService } from '../core/services/auth.service';
 import { IUserLogin } from '../shared/interfaces';
 import { GrowlerService, GrowlerMessageType } from '../core/growler/growler.service';
+import { LoggerService } from '../core/services/logger.service';
 
 @Component({
     selector: 'cm-login',
@@ -34,13 +36,19 @@ export class LoginComponent implements OnInit {
 
 TODO 2: Defining a FormGroup Property
 
-Add a new property named loginForm that is of type FormGroup below.
+Add a new property named loginForm that is of type FormGroup below. Assign the loginForm property a value of:
+
+    {} as FormGroup;
 
 */
 
 
 
-    errorMessage: string;
+    // The `f` property is a getter that returns the loginForm controls for easy access in the HTML template
+    get f(): { [key: string]: AbstractControl } {
+        return this.loginForm.controls;
+    }
+    errorMessage: string = '';
 
 /*
 
@@ -51,9 +59,10 @@ a type of FormBuilder and mark it as private.
 
 */
 
-    constructor(private router: Router, 
-                private authService: AuthService,
-                private growler: GrowlerService) { }
+    constructor(private router: Router,
+        private authService: AuthService,
+        private growler: GrowlerService,
+        private logger: LoggerService) { }
 
     /*
 
@@ -127,7 +136,7 @@ a type of FormBuilder and mark it as private.
                     this.growler.growl(loginError, GrowlerMessageType.Danger);
                 }
             },
-            (err: any) => console.log(err));
+            (err: any) => this.logger.log(err));
     }
 
 }

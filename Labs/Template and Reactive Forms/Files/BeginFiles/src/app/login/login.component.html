@@ -40,13 +40,13 @@
                             formControlName="email"
                         
                         2. You can access the status of the control (touched/untouched, valid/invalid, etc.)
-                           through the FormGroup name, loginForm.controls.email.touched for example, as shown 
+                           through calling into a property in the component named `f` as shown 
                            on the <div> that is below the email <input>. 
 
                     --> 
 
-                        <input type="email" name="email" class="form-control" />
-                        <div class="alert alert-danger" [hidden]="loginForm.controls.email.untouched || loginForm.controls.email.valid">
+                        <input title="email" type="email" name="email" class="form-control" />
+                        <div class="alert alert-danger" data-cy="email-error" [hidden]="f['email'].untouched || f['email'].valid">
                             A valid email address is required
                         </div>
                     </div>
@@ -56,10 +56,10 @@
                     <div class="col-md-2">
                         Password:
                     </div>
-                    <div class="col-md-10"> 
-                        <input type="password" name="password" class="form-control" formControlName="password" />
-                        <div class="alert alert-danger" [hidden]="loginForm.controls.password.untouched || loginForm.controls.password.valid">
-                            Password is required (one number required and must be 6 or more characters)
+                    <div class="col-md-10">
+                        <input title="password" type="password" name="password" class="form-control" formControlName="password" />
+                        <div class="alert alert-danger" data-cy="password-error" [hidden]="f['password'].untouched || f['password'].valid">
+                            Password is required (6 or more characters with at least one number)
                         </div>
                     </div>
                 </div>

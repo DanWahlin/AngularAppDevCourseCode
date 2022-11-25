@@ -28,23 +28,23 @@ export class CustomerEditComponent implements OnInit {
 
   */
 
-  customer: ICustomer = 
-  {
-    id: 0,
-    firstName: '',
-    lastName: '',
-    gender: '',
-    address: '',
-    city: '',
-    state: {
+    customer: ICustomer =
+    {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      gender: '',
+      address: '',
+      city: '',
+      state: {
         abbreviation: '',
         name: ''
-    }
-  };
-  states: IState[];
-  errorMessage: string;
-  deleteMessageEnabled: boolean;
-  operationText: string = 'Insert';
+      }
+    };
+    states: IState[] = [];
+    errorMessage: string = '';
+    deleteMessageEnabled: boolean = false;
+    operationText = 'Insert';
 
  /*
 
@@ -56,7 +56,7 @@ export class CustomerEditComponent implements OnInit {
    will be used to track when the user has changed the form (made the form "dirty").
 
  */
-  @ViewChild('customerForm') customerForm: NgForm;
+   @ViewChild('customerForm', { static: true }) customerForm: NgForm = {} as NgForm;
 
   /*
 
@@ -70,11 +70,12 @@ export class CustomerEditComponent implements OnInit {
 
   */
   
-  constructor(private router: Router, 
-              private route: ActivatedRoute, 
-              private dataService: DataService,
-              private growler: GrowlerService,
-              private modalService: ModalService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private growler: GrowlerService,
+    private modalService: ModalService,
+    private logger: LoggerService) { }
 
   /*
 
@@ -82,7 +83,7 @@ export class CustomerEditComponent implements OnInit {
 
   1. Add the following code into the ngOnInit() function below:
      
-      this.route.parent.params.subscribe((params: Params) => {
+      this.route.parent?.params.subscribe((params: Params) => {
         let id = +params['id'];
         if (id !== 0) {
           this.operationText = 'Update';
@@ -104,7 +105,7 @@ export class CustomerEditComponent implements OnInit {
          states: IState[]
 
       c. Assign the states parameter value that's returned to the component's
-         states property.
+         `states` property.
 
          Note: If you need help with the previous steps refer to the course manual 
          (the Http section) or to the lab's end solution code. The next TODO
@@ -119,28 +120,27 @@ export class CustomerEditComponent implements OnInit {
   }
 
   getCustomer(id: number) {
-      this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
-        this.customer = customer;
-      });
+    this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
+      this.customer = customer;
+    });
   }
 
   submit() {
-      if (this.customer.id === 0) {
-        this.dataService.insertCustomer(this.customer)
-          .subscribe((insertedCustomer: ICustomer) => {
-            if (insertedCustomer) {
-              //Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
-              this.customerForm.form.markAsPristine();
-              this.router.navigate(['/customers']);
-            } else {
-              const msg = 'Unable to insert customer';
-              this.growler.growl(msg, GrowlerMessageType.Danger);
-              this.errorMessage = msg;
-            }
-          },
-          (err: any) => console.log(err));
-
-      } else {
+    if (this.customer.id === 0) {
+      this.dataService.insertCustomer(this.customer)
+        .subscribe((insertedCustomer: ICustomer) => {
+          if (insertedCustomer) {
+            // Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
+            this.customerForm.form.markAsPristine();
+            this.router.navigate(['/customers']);
+          } else {
+            const msg = 'Unable to insert customer';
+            this.growler.growl(msg, GrowlerMessageType.Danger);
+            this.errorMessage = msg;
+          }
+        },
+          (err: any) => this.logger.log(err));
+    } else {
         /*
 
         TODO 5: Updating a Customer Object
@@ -153,20 +153,19 @@ export class CustomerEditComponent implements OnInit {
               if (status) {
 
 
-              }
-              else {
+              } else {
                 const msg = 'Unable to update customer';
                 this.growler.growl(msg, GrowlerMessageType.Danger);
                 this.errorMessage = msg;
               }
           },
-          (err: any) => console.log(err));
+          (err: any) => this.logger.log(err));
 
         2. Within the "if (status) { }" code you added in the previous task, add the following code to 
            mark the form as pristine and use a growler service (a message display service) to display
            a message to the user:
 
-            //Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
+            // Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
             this.customerForm.form.markAsPristine();
             this.growler.growl('Operation performed successfully.', GrowlerMessageType.Success);
 
@@ -208,15 +207,14 @@ export class CustomerEditComponent implements OnInit {
   delete(event: Event) {
     event.preventDefault();
     this.dataService.deleteCustomer(this.customer.id)
-        .subscribe((status: boolean) => {
-          if (status) {
-            this.router.navigate(['/customers']);
-          }
-          else {
-            this.errorMessage = 'Unable to delete customer';
-          }
-        },
-        (err) => console.log(err));
+      .subscribe((status: boolean) => {
+        if (status) {
+          this.router.navigate(['/customers']);
+        } else {
+          this.errorMessage = 'Unable to delete customer';
+        }
+      },
+        (err) => this.logger.log(err));
   }
 
   /*
@@ -227,7 +225,7 @@ export class CustomerEditComponent implements OnInit {
      canDeactivate() function (defined below) to determine if it's OK to leave the view. If the
      form is dirty and has unsaved changes we want to prompt the user before navigating to another route.
 
-  2. Add the following code ABOVE the existing code in canDeactive() to let the route guard know if the 
+  2. Add the following code after the `Add code here` comment in canDeactive() to let the route guard know if the 
      form is dirty or not:
 
     if (!this.customerForm.dirty) {
@@ -245,13 +243,13 @@ export class CustomerEditComponent implements OnInit {
 
 
 
-    //Dirty show display modal dialog to user to confirm leaving
+    // Dirty show display modal dialog to user to confirm leaving
     const modalContent: IModalContent = {
       header: 'Lose Unsaved Changes?',
       body: 'You have unsaved changes! Would you like to leave the page and lose them?',
       cancelButtonText: 'Cancel',
       OKButtonText: 'Leave'
-    }
+    };
     return this.modalService.show(modalContent);
   }
 
