@@ -11,7 +11,7 @@ import { ICustomer, IOrder, IOrderItem } from '../shared/interfaces';
 export class CustomerOrdersComponent implements OnInit {
 
   orders: IOrder[] = [];
-  customer: ICustomer;
+  customer = {} as ICustomer;
 
   constructor(private dataService: DataService, 
               private route: ActivatedRoute) { }

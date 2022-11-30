@@ -9,7 +9,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class FilterTextboxComponent implements OnInit {
 
-    filter: string = null;
+    filter = '';
     
     @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 

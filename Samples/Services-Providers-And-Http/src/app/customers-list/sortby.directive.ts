@@ -8,7 +8,7 @@ import { Directive, Input, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class SortbyDirective implements OnInit {
 
-    private _sortby: string;
+    private _sortby = '';
 
     @Output() sorted: EventEmitter<string> = new EventEmitter<string>();
 

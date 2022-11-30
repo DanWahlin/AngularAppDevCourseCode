@@ -9,11 +9,11 @@ import { Sorter } from '../shared/sorter';
 })
 export class CustomersListComponent implements OnInit {
 
-    title: string;
-    @Input() customers: ICustomer[];
-    filteredCustomers: ICustomer[];
-    customersOrderTotal: number = 0;
-    currencyCode: string = 'USD';
+    title = '';
+    @Input() customers: ICustomer[] = [];
+    filteredCustomers: ICustomer[] = [];
+    customersOrderTotal = 0;
+    currencyCode = 'USD';
 
     constructor(private sorter: Sorter) { }
 
@@ -21,7 +21,7 @@ export class CustomersListComponent implements OnInit {
         this.title = 'Customers';
 
         this.customers.forEach((cust: ICustomer) => {
-            this.customersOrderTotal += cust.orderTotal;
+            this.customersOrderTotal += cust.orderTotal!;
         });
         this.filteredCustomers = this.customers;
     }

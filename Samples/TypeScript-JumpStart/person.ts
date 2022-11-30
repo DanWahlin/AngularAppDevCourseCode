@@ -19,4 +19,5 @@ var person = new Person({
     city: 'Chandler',
     state: 'Arizona'
 });
+
 alert(person.personInfo.city);

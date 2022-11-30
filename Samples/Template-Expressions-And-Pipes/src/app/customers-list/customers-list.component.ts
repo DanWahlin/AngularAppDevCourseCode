@@ -8,8 +8,8 @@ import { ICustomer } from '../shared/interfaces';
 })
 export class CustomersListComponent implements OnInit {
 
-    title: string;
-    customers: ICustomer[];
+    title = '';
+    customers: ICustomer[] = [];
     customersOrderTotal = 0;
     currencyCode = 'USD';
     bgColor = 'yellow';
@@ -24,7 +24,7 @@ export class CustomersListComponent implements OnInit {
             { id: 3, name: 'Michelle Thomas', city: 'Seattle', orderTotal: 99.99, customerSince: new Date(2002, 10, 31)},
         ];
         this.customers.forEach((cust: ICustomer) => {
-            this.customersOrderTotal += cust.orderTotal;
+            this.customersOrderTotal += cust.orderTotal!;
         });
     }
 

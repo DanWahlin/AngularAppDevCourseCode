@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomersListComponent implements OnInit {
 
-	 title: string;
+	 title = '';
 
     constructor() { }
 
     ngOnInit() { 
-		this.title = 'Customers';
+		  this.title = 'Customers';
     }
 
 }

@@ -9,7 +9,7 @@ import { DataService } from '../core/data.service';
 })
 export class CustomersComponent implements OnInit {
 
-    people: ICustomer[];
+    people: ICustomer[] = [];
 
     constructor(private dataservice: DataService) { }
 

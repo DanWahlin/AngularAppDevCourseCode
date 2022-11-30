@@ -11,7 +11,7 @@ import { DataService } from './core/data.service';
 })
 export class AppComponent implements OnInit {
   
-  people: ICustomer[];
+  people: ICustomer[] = [];
 
   constructor(private dataservice: DataService) { }
 
